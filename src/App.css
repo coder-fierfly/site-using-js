@@ -11,7 +11,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +36,9 @@
 
 .Menu {
   position: absolute;
+  background-color: gray;
+  height: 100%;
+  width: auto;
   right: 0;
   display: flex;
   flex-direction: column;
@@ -53,8 +56,130 @@
   border: solid blue;
 }
 
+.card {
+  align-items: center;
+  background-color: #ffffff;
+  border: solid 0.1rem #e3e3e3;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  /* height: 13.2rem; */
+  overflow: hidden;
+  padding-right: 0.8rem;
+  position: relative;
+  width: 100%;
 
-.auto-group-bphi-6mi {
+  .line {
+    background-color: #ffca30;
+    flex-shrink: 0;
+    height: 13.1rem;
+    margin: 0rem 1.4rem 0.1rem 0rem;
+    width: 0.2rem;
+  }
+
+  .signal_color {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: calc(100% - 1.6rem);
+    margin: 0.8rem 0.8rem 0.8rem 0rem;
+    width: 1.6rem;
+
+    .circle {
+      background-color: #ffca30;
+      border-radius: 0.8rem;
+      flex-shrink: 0;
+      height: 1.6rem;
+      margin-bottom: 0.1rem;
+      width: 100%;
+    }
+
+    .line {
+      background-color: #ffca30;
+      flex-shrink: 0;
+      height: 9.9rem;
+      margin: 0rem 0.7rem 0rem 0.8rem;
+      width: calc(100% - 1.5rem);
+    }
+  }
+
+  .text_group {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: calc(100% - 2.3rem);
+    margin: 0.8rem 1.1rem 1.5rem 0rem;
+
+    .item_1 {
+      color: #515357;
+      flex-shrink: 0;
+      font-family: Roboto, 'Source Sans Pro';
+      font-size: 1.7rem;
+      font-weight: 500;
+      line-height: 1.1725;
+      margin-bottom: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .item_2 {
+      color: #515357;
+      flex-shrink: 0;
+      font-family: Roboto, 'Source Sans Pro';
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.1725;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+    }
+
+    .item_3 {
+      color: #93959a;
+      flex-shrink: 0;
+      font-family: Roboto, 'Source Sans Pro';
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.1725;
+      margin-bottom: 1.1rem;
+      max-width: 20.1rem;
+    }
+
+    .item_4 {
+      color: #515357;
+      flex-shrink: 0;
+      font-family: Roboto, 'Source Sans Pro';
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.1725;
+      white-space: nowrap;
+    }
+  }
+
+  .code_mes {
+    color: #515357;
+    flex-shrink: 0;
+    font-family: Roboto, 'Source Sans Pro';
+    font-size: 1.4rem;
+    font-weight: 500;
+    height: 4.5rem;
+    line-height: 1.1725;
+    margin-bottom: 6.7rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .rectangle-2962-dnF {
+    background-color: rgba(200, 204, 208, 0.6999999881);
+    border-radius: 1rem;
+    flex-shrink: 0;
+    height: 6.6rem;
+    margin-top: 1.2rem;
+    width: 0.8rem;
+  }
+}
+
+
+.top_menu {
   align-items: center;
   box-sizing: border-box;
   display: flex;
@@ -63,7 +188,7 @@
   padding: 1.2rem 1.6rem;
   width: 100%;
 
-  .auto-group-rc8c-Ed2 {
+  .big_period_group {
     align-items: center;
     display: flex;
     flex-shrink: 0;
@@ -71,7 +196,7 @@
     margin-bottom: 1.6rem;
     width: 100%;
 
-    .togl-menu-ZfJ {
+    .period_group {
       align-items: center;
       background-color: #f0f1f2;
       border-radius: 0.4rem;
@@ -83,7 +208,7 @@
 
 
 
-      .frame-661-QA8:active {
+      .period:active {
         align-items: center;
         background-color: #93959a;
         border-radius: 0.4rem;
@@ -103,7 +228,7 @@
         border-style: none;
       }
 
-      .frame-661-QA8 {
+      .period {
         align-items: center;
         background-color: #f0f1f2;
         border-radius: 0.4rem;
@@ -126,7 +251,7 @@
 
     }
 
-    .button-phoenix-nAg {
+    .another_period_btn {
       background-color: #ffffff;
       border-radius: 0.4rem;
       box-sizing: border-box;
@@ -146,14 +271,14 @@
     }
   }
 
-  .auto-group-nvx2-E2g {
+  .filter_group {
     align-items: center;
     display: flex;
     flex-shrink: 0;
     height: 3.2rem;
     width: 100%;
 
-    .search-small-Ah2 {
+    .search {
       background-color: #ffffff;
       border: solid 0.1rem #e3e3e3;
       border-radius: 0.4rem;
@@ -166,13 +291,13 @@
       position: relative;
       width: 22.4rem;
 
-      .item--hgx {
+      .search_group {
         align-items: center;
         display: flex;
         height: 100%;
         width: 8.3rem;
 
-        .x24-search-ERz {
+        .loupe_btn {
           flex-shrink: 0;
           height: 1.75rem;
           margin: 0rem 1.15rem 0.05rem 0rem;
@@ -181,7 +306,7 @@
           width: 1.75rem;
         }
 
-        .item--ZDN {
+        .search_title {
           color: #93959a;
           display: flex;
           flex-shrink: 0;
@@ -194,7 +319,7 @@
       }
     }
 
-    .button-phoenix-FM6 {
+    .filter_btn {
       background-color: #ffffff;
       border-radius: 0.4rem;
       box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1199999973);
@@ -205,7 +330,7 @@
       padding: 0.7rem 0.8rem 0.7rem 0.8rem;
       position: relative;
 
-      .x24-filter-Ayr {
+      .filter_img {
         height: 1.8003rem;
         object-fit: contain;
         vertical-align: top;
@@ -213,4 +338,9 @@
       }
     }
   }
+}
+
+.text_area:focus,
+input:focus {
+  outline: none;
 }

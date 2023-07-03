@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
-import { Nav, Sidenav, Collapse, Sidebar, Toggle } from "rsuite";
+import { Nav, Sidenav, Collapse, Sidebar, Toggle, Dropdown } from "rsuite";
 import { Icon } from "@rsuite/icons";
 
 
 import { Code } from "@rsuite/icons";
+import TopMenu from "./TopMenu";
+import Card from "./Card";
 
 const CollapseMenu = () => {
 
@@ -15,37 +17,29 @@ const CollapseMenu = () => {
     };
 
     return (
-        <div style={{ height: '100vh' }}>
-            <Sidebar
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-                width={collapsed ? 56 : 260}
-                collapsible
+        <Sidebar className="SidebarCollapse"
+            width={collapsed ? 57 : 350}
+            collapsible
+        >
+            <Sidenav className="SidenavCollapse"
+                expanded={!collapsed}
             >
-                <Sidenav
-                    expanded={!collapsed}
-                    style={{ flex: 1, display: 'flex', flexDirection: 'column', width: '100%' }}
-                >
-                    <Sidenav.Body>
-                        <Sidenav.Toggle
-                            expanded={collapsed}
-                            onToggle={(expanded) => setCollapsed(expanded)}
-                        />
+                <Sidenav.Body>
+                    <Sidenav.Toggle
+                        expanded={collapsed}
+                        onToggle={(expanded) => setCollapsed(expanded)}
+                    />
+                    {/* TODO понять как отступ поменять */}
+                    <Dropdown eventKey="1">
+                        <Dropdown.Item eventKey="1-1"><TopMenu /></Dropdown.Item>
+                        <Dropdown.Item eventKey="1-2">
+                            <Card />
+                        </Dropdown.Item>
+                    </Dropdown>
 
-                        <Nav>
-                            <Nav.Item eventKey="1" icon={<Icon icon="dashboard" />}>
-                                Dashboard
-                            </Nav.Item>
-                            <Nav.Item eventKey="2" icon={<Icon icon="group" />}>
-                                Users
-                            </Nav.Item>
-                            <Nav.Item eventKey="3" icon={<Icon icon="calendar" />}>
-                                Calendar
-                            </Nav.Item>
-                        </Nav>
-                    </Sidenav.Body>
-                </Sidenav>
-            </Sidebar>
-        </div>
+                </Sidenav.Body>
+            </Sidenav>
+        </Sidebar>
     );
 };
 
