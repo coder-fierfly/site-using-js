@@ -10,6 +10,7 @@ import TopMenu from "./TopMenu";
 import Card from "./Card";
 import NavItem from "rsuite/esm/Nav/NavItem";
 
+
 const CollapseMenu = () => {
 
     const [collapsed, setCollapsed] = useState(true);
@@ -37,7 +38,6 @@ const CollapseMenu = () => {
                 </Sidenav.Header>
 
                 <Sidenav.Body>
-
                     {/* TODO понять как убрать при свертывании */}
                     <Nav id="menuItems">
                         {!collapsed && (
@@ -45,8 +45,11 @@ const CollapseMenu = () => {
                                 <div className="d-flex">
                                     <NavItem><TopMenu /></NavItem>
                                 </div>
-                                <NavItem><Card /></NavItem>
-     
+                                <div className="d-flex">
+                                    <NavItem><Card />
+                                    </NavItem>
+                                </div>
+
                             </>
                         )}
                     </Nav>
