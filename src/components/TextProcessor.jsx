@@ -8,7 +8,6 @@ function TextProcessor() {
     };
 
     const processText = () => {
-        // Process the inputText here
         console.log(inputText);
     };
 
