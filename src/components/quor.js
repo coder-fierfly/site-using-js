@@ -56,9 +56,12 @@ class Quor extends Component {
                     // quotList.filter(item => item.state === 1).map(item => {
                     quotList.map(item => {
 
-
+                        console.error(item.time_value);
                         var col = matchMapping[item.state].color;
                         // var time = Date(item.time_value * 1000).toString();
+                        console.log((new Date(item.time_value * 1000)));
+                        var asd = new Date(item.time_value * 1000);
+                        var as = asd.toDateString();
 
                         // document.write("hehe " +col);
                         // quotList.map((s) => {
@@ -78,7 +81,7 @@ class Quor extends Component {
                                         <p className="item_3">{item.target_name}</p>
                                         {/* TODO сделать максимум 3 строки */}
                                         <p className="item_5">{item.label}</p>
-                                        <p class="item_4">{Date(item.time_value * 1000).toString()}</p>
+                                        <p class="item_4">{as}</p>
 
                                     </div>
                                 </div>
