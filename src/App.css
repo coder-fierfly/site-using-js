@@ -3,6 +3,40 @@
   pointer-events: none;
 }
 
+a.rs-nav-item {
+  padding-top: 0rem;
+  padding-left: 0rem;
+  padding-right: 0;
+  padding-bottom: 0rem;
+}
+
+.in_line {
+  /* overflow: auto; */
+  white-space: nowrap;
+  display: inline;
+  position: relative;
+  height: 35px;
+  margin-bottom: 15px;
+}
+
+button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {
+  float: none;
+}
+
+
+
+#toggleButton::after {
+
+  float: none !important;
+}
+
+.line_element {
+  display: inline-block;
+
+  /* Размещает элементы в одной строке */
+
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -110,8 +144,13 @@
     flex-shrink: 0;
     height: calc(100% - 2.3rem);
     margin: 0.8rem 1.1rem 1.5rem 0rem;
+    white-space: nowrap;
 
     .item_1 {
+      width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: #515357;
       flex-shrink: 0;
       font-family: Roboto, 'Source Sans Pro';
@@ -119,10 +158,13 @@
       font-weight: 500;
       line-height: 1.1725;
       margin-bottom: 0.8rem;
-      white-space: nowrap;
     }
 
     .item_2 {
+      width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: #515357;
       flex-shrink: 0;
       font-family: Roboto, 'Source Sans Pro';
@@ -130,10 +172,28 @@
       font-weight: 400;
       line-height: 1.1725;
       margin-bottom: 0.3rem;
-      white-space: nowrap;
+      /* white-space: nowrap; */
     }
 
     .item_3 {
+      /* display: -webkit-box; */
+      /* -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      line-height: 1.2;
+      max-height: 3.6em; */
+      /* (line-height * number of lines) */
+      /* width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis; */
+
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
       color: #93959a;
       flex-shrink: 0;
       font-family: Roboto, 'Source Sans Pro';
@@ -141,7 +201,7 @@
       font-weight: 400;
       line-height: 1.1725;
       margin-bottom: 1.1rem;
-      max-width: 20.1rem;
+
     }
 
     .item_4 {
@@ -151,7 +211,7 @@
       font-size: 1.4rem;
       font-weight: 400;
       line-height: 1.1725;
-      white-space: nowrap;
+      /* white-space: nowrap; */
     }
   }
 
@@ -178,6 +238,9 @@
   }
 }
 
+div#toggleButton {
+  border-top: 0px;
+}
 
 .top_menu {
   align-items: center;
@@ -185,7 +248,11 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  padding: 1.2rem 1.6rem;
+  /* padding: 1.2rem 1.6rem; */
+  padding-top: 1.2rem;
+  padding-left: 1.6rem;
+  padding-right: 0;
+  padding-bottom: 1.2rem;
   width: 100%;
 
   .big_period_group {

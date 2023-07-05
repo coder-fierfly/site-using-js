@@ -23,25 +23,7 @@ const TopMenu = () => {
                     <div class="period">Сегодня</div>
                     <div class="period">Вчера</div>
                 </div>
-                <div class="another_period_btn">
-                    <img class="x24-arrow-right-7Cx" src="" />
-                </div>
-            </div>
-            <div class="filter_group">
-                <div class="search">
-                    <div class="search_group">
-                        <button onClick={processText}><img class="loupe_btn" src="" /></button>
-                        <div class="search_title"><input className="text_area"
-                            type="text"
-                            value={inputText}
-                            placeholder={placeholderText}
-                            onChange={handleInputChange}
-                        /></div>
-                    </div>
-                </div>
-                <div class="filter_btn">
-                    <img class="filter_img" src="" />
-                </div>
+
             </div>
         </div >
     );

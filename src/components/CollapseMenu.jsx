@@ -3,12 +3,10 @@ import "rsuite/dist/rsuite.min.css";
 import { Nav, Sidenav, Collapse, Sidebar, Toggle, Dropdown } from "rsuite";
 import { Icon } from "@rsuite/icons";
 
-
-
-import { Code } from "@rsuite/icons";
 import TopMenu from "./TopMenu";
 import Card from "./Card";
 import NavItem from "rsuite/esm/Nav/NavItem";
+import TopMenuFilter from "./TopMenuFilter";
 
 
 const CollapseMenu = () => {
@@ -30,30 +28,52 @@ const CollapseMenu = () => {
             <Sidenav className="SidenavCollapse" appearance="default"
                 expanded={!collapsed}
             >
-                <Sidenav.Header>
-                    <Sidenav.Toggle id="toggleButton"
-                        expanded={collapsed}
-                        onToggle={(expanded) => setCollapsed(expanded)}
-                    />
-                </Sidenav.Header>
+                <div className="in_line">
+                    <div className="line_element">
+                        <Sidenav.Body>
+                            {/* TODO понять как убрать при свертывании */}
+                            <Nav id="menuItems">
+                                {!collapsed && (
+                                    <>
+                                        {/* <div className="d-flex"> */}
+                                        <TopMenu />
+                                        {/* <NavItem><TopMenu /></NavItem> */}
+
+                                    </>
+                                )}
+                            </Nav>
+                        </Sidenav.Body>
+                    </div>
+                    <div className="line_element">
+                        <div className="toggle">
+                            <Sidenav.Header>
+                                <Sidenav.Toggle id="toggleButton"
+                                    expanded={collapsed}
+                                    onToggle={(expanded) => setCollapsed(expanded)}
+                                />
+                            </Sidenav.Header>
+                        </div>
+                    </div>
+
+                </div>
+
 
                 <Sidenav.Body>
-                    {/* TODO понять как убрать при свертывании */}
                     <Nav id="menuItems">
                         {!collapsed && (
                             <>
-                                <div className="d-flex">
-                                    <NavItem><TopMenu /></NavItem>
-                                </div>
-                                <div className="d-flex">
-                                    <NavItem><Card />
-                                    </NavItem>
-                                </div>
+                                {/* </div> */}
+                                {/* <div className="d-flex"> */}
+                                <NavItem><TopMenuFilter /></NavItem>
+                                <NavItem><Card />
+                                </NavItem>
+
+                                {/* </div> */}
 
                             </>
                         )}
-                    </Nav>
 
+                    </Nav>
 
                 </Sidenav.Body>
             </Sidenav>
