@@ -64,9 +64,9 @@ const CollapseMenu = () => {
                             <>
                                 {/* </div> */}
                                 {/* <div className="d-flex"> */}
-                                <NavItem><TopMenuFilter /></NavItem>
-                                <NavItem><Card />
-                                </NavItem>
+                                <TopMenuFilter />
+                                <Card />
+                               
 
                                 {/* </div> */}
 

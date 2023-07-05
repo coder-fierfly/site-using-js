@@ -8,6 +8,13 @@ a.rs-nav-item {
   padding-left: 0rem;
   padding-right: 0;
   padding-bottom: 0rem;
+  overflow: auto;
+  border-radius: 0px;
+}
+
+.rs-nav-item {
+  overflow: auto;
+  border-radius: 0px;
 }
 
 .in_line {
@@ -70,7 +77,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 .Menu {
   position: absolute;
-  background-color: #F7F7FA;
+  background-color: #FFFFFF;
   height: 100%;
   width: auto;
   right: 0;
@@ -93,7 +100,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 .card {
   align-items: center;
   background-color: #ffffff;
-  border: solid 0.1rem #e3e3e3;
+  border-bottom: solid 0.1rem #e3e3e3;
   box-sizing: border-box;
   display: flex;
   flex-shrink: 0;
@@ -102,13 +109,21 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   padding-right: 0.8rem;
   position: relative;
   width: 100%;
+  min-height: 100px;
+  overflow: hidden;
 
-  .line {
-    background-color: #ffca30;
+  .board_line {
+
     flex-shrink: 0;
-    height: 13.1rem;
-    margin: 0rem 1.4rem 0.1rem 0rem;
+    /* height: 13.1rem; */
+    height: 100%;
+    margin: 0rem 1.4rem 0rem 0rem;
     width: 0.2rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .signal_color {
@@ -117,22 +132,49 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
     flex-direction: column;
     flex-shrink: 0;
     height: calc(100% - 1.6rem);
-    margin: 0.8rem 0.8rem 0.8rem 0rem;
+    /* margin: 0.8rem 0.8rem 0.8rem 0rem; */
     width: 1.6rem;
+    margin-left: 15px;
+    /* position: relative; */
+    /* padding-bottom: 100%; */
+
 
     .circle {
-      background-color: #ffca30;
+
       border-radius: 0.8rem;
       flex-shrink: 0;
       height: 1.6rem;
-      margin-bottom: 0.1rem;
-      width: 100%;
+      /* margin-bottom: 0.1rem; */
+      width: 1.6rem;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+
+      /* margin-bottom: calc(100%); */
+
+      /* position: absolute; */
+      /* position: ; */
+      /* margin-bottom: 120px; */
+
+      /* margin-bottom: 85%; */
+      /* top: 10px; */
+      /* bottom: 0; */
+      /* left: 0; */
+      /* right: 0; */
     }
 
     .line {
-      background-color: #ffca30;
+
+
+      /* background-color: #ffca30; */
       flex-shrink: 0;
-      height: 9.9rem;
+      /* height: 9.9rem; */
+      position: absolute;
+      /* height: 100%; */
+      top: 10px;
+      bottom: 10px;
+      left: 15px;
+      right: 0;
       margin: 0rem 0.7rem 0rem 0.8rem;
       width: calc(100% - 1.5rem);
     }
@@ -143,11 +185,14 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
     flex-direction: column;
     flex-shrink: 0;
     height: calc(100% - 2.3rem);
-    margin: 0.8rem 1.1rem 1.5rem 0rem;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 8px;
+    font-family: Roboto, 'Source Sans Pro';
     white-space: nowrap;
 
     .item_1 {
-      width: 250px;
+      width: 240px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -161,7 +206,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
     }
 
     .item_2 {
-      width: 250px;
+      width: 240px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -190,7 +235,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      max-width: 250px;
+      max-width: 240px;
       overflow: hidden;
       text-overflow: ellipsis;
 
@@ -200,7 +245,8 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
       font-size: 1.4rem;
       font-weight: 400;
       line-height: 1.1725;
-      margin-bottom: 1.1rem;
+      margin-bottom: 0.8rem;
+
 
     }
 
@@ -211,6 +257,23 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
       font-size: 1.4rem;
       font-weight: 400;
       line-height: 1.1725;
+      /* white-space: nowrap; */
+    }
+
+    .item_5 {
+      width: 240px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #515357;
+      flex-shrink: 0;
+      font-family: Roboto, 'Source Sans Pro';
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.1725;
+      margin-top: 0;
+      margin-bottom: 1.1rem;
+
       /* white-space: nowrap; */
     }
   }
@@ -240,6 +303,11 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 div#toggleButton {
   border-top: 0px;
+  color: while;
+}
+
+button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {
+  background-color: white;
 }
 
 .top_menu {
@@ -254,6 +322,7 @@ div#toggleButton {
   padding-right: 0;
   padding-bottom: 1.2rem;
   width: 100%;
+  background-color: #FFFFFF;
 
   .big_period_group {
     align-items: center;

@@ -6,21 +6,41 @@ var quotList = json.data.alerts;
 const matrixArray = [];
 
 const matchMapping = {
+
     1: {
-        color: "yellow",
-        description: "alarm"
+        color: "#38C25D",
+        description: "Штатно"
     },
     2: {
-        color: "blue",
-        description: "escape"
+        color: "#FFCA31",
+        description: "Сигнализация"
     },
-    // Add more mappings as needed
-};
+    3: {
+        color: "#EA4335",
+        description: "Риск аварии"
+    },
+    4: {
+        color: "#AD2C72",
+        description: "Критические события"
+    },
+    5: {
+        color: "#858B99",
+        description: "Нет данных"
+    },
+    6: {
+        color: "#D9E2EC",
+        description: ""
+    },
+    7: {
+        color: "#4285F4",
+        description: "Резерв"
+    },
+    0: {
+        color: "#4285F4",
+        description: "Резерв"
+    }
 
-//   const digit = 1;
-// const match = matchMapping[digit];
-// console.log(match.color); // Output: "yellow"
-// console.log(match.description); // Output: "alarm"
+};
 
 class Quor extends Component {
 
@@ -33,26 +53,33 @@ class Quor extends Component {
             <ui>
                 {
 
-                    quotList.filter(item => item.state === 1).map(item => {
+                    // quotList.filter(item => item.state === 1).map(item => {
+                    quotList.map(item => {
+
+
+                        var col = matchMapping[item.state].color;
+                        // var time = Date(item.time_value * 1000).toString();
+
+                        // document.write("hehe " +col);
                         // quotList.map((s) => {
                         return (
                             <div className="card">
-                                <div className="line"></div>
-                                <div className="signal_color">
-                                    <div className="circle"></div>
-                                    <div className="line"></div>
+                                {/* <div className="color"> */}
+                                <div className="board_line" style={{ background: col }}></div>
+                                <div className="signal_color"  >
+                                    <div className="circle" style={{ background: col }}></div>
+                                    <div className="line" style={{ borderLeft: "1.5px dashed" + col }}></div>
                                 </div>
+                                {/* </div> */}
                                 <div className="text_group">
                                     <div>
-                                        {/* <div>hehe</div> */}
-                                        {/* <div>{item.state}
-                                    <div>{item.name}</div> */}
-                                        <p className="item_1">{item.state}</p>
+                                        <p className="item_1">{matchMapping[item.state].description}</p>
                                         <p className="item_2">{item.name}</p>
                                         <p className="item_3">{item.target_name}</p>
                                         {/* TODO сделать максимум 3 строки */}
-                                        <p class="item_4">{item.time_value}</p>
-                                        <p ></p>
+                                        <p className="item_5">{item.label}</p>
+                                        <p class="item_4">{Date(item.time_value * 1000).toString()}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +109,5 @@ class Quor extends Component {
 
     }
 }
-
-// module.exports = matrixArray;
 
 export default Quor;
