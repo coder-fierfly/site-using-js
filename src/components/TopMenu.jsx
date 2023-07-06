@@ -17,13 +17,13 @@ const TopMenu = () => {
     const handleButtonClick = (option) => {
         TimeFilter(option)
         setSelectedOption(option);
-
     };
 
     return (
-        <div class="top_menu">
-            <div class="big_period_group">
-                <div class="period_group">
+        
+        <div className="top_menu">
+            <div className="big_period_group">
+                <div className="period_group">
                     <button className={selectedOption === 'withinHour' ? 'p_active' : 'period'}
                         onClick={() => handleButtonClick('withinHour')}>Час</button>
                     <button className={selectedOption === 'today' ? 'p_active' : 'period'}
@@ -34,7 +34,7 @@ const TopMenu = () => {
             </div>
             {/* <Cards dat={data} />; */}
         </div >
-
+        
     );
 };
 export default TopMenu;

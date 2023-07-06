@@ -45,21 +45,48 @@ const matchMapping = {
 
 };
 
-const Cards = () => {
+const Cards = (props) => {
 
 
 
     // const filt = cardList.filter(item => item.state === 1);
+    // return (
+
+    // парсинг из json
+    // <ui>
+    {/* { */ }
+    // cardList.filter(item => item.state === 1).map(item => {
+    // quotList.map(item => { 
+    // var currentDate = new Date();
+
+    // console.error(item.time_value);
+    // var col = matchMapping[props.itemValue.state].color;
+    // // console.log((new Date(item.time_value * 1000)));
+    // var convertDate = new Date(props.itemValue.time_value * 1000);
+    // var cDateString = convertDate.toDateString();
+    // const sd = new Date(props.itemValue.time_value * 1000);
+    // const formattedDate = sd.toLocaleString('en-US', {
+    //     day: '2-digit',
+    //     month: '2-digit',
+    //     year: 'numeric',
+    //     hour: 'numeric',
+    //     minute: 'numeric',
+    //     second: 'numeric',
+    //     hour12: false
+    // }).replace(/\//g, '.').replace(/,/g, '');
+
+
+
+    // cardList.map((s) => {
+
+
     return (
+        <div>
+            {props.itemValue.length === 0 ? (
+                <p>No elements found.</p>
+            ) : (
+                props.itemValue.map((item) => {
 
-        // парсинг из json
-        <ui>
-            {
-                // cardList.filter(item => item.state === 1).map(item => {
-                    quotList.map(item => { 
-                    // var currentDate = new Date();
-
-                    // console.error(item.time_value);
                     var col = matchMapping[item.state].color;
                     // console.log((new Date(item.time_value * 1000)));
                     var convertDate = new Date(item.time_value * 1000);
@@ -75,33 +102,31 @@ const Cards = () => {
                         hour12: false
                     }).replace(/\//g, '.').replace(/,/g, '');
 
-
-
-                    // cardList.map((s) => {
                     return (
                         <div className="card">
-                                {/* <div className="color"> */}
-                                <div className="board_line" style={{ background: col }}></div>
-                                <div className="signal_color"  >
-                                    <div className="circle" style={{ background: col }}></div>
-                                    <div className="line" style={{ borderLeft: "1.5px dashed" + col }}></div>
-                                </div>
-                                {/* </div> */}
-                                <div className="text_group">
-                                    <div>
-                                        <p className="item_1">{matchMapping[item.state].description}</p>
-                                        <p className="item_2">{item.name}</p>
-                                        <p className="item_3">{item.target_name}</p>
-                                        <p className="item_5">{item.label}</p>
-                                        <p class="item_4">{cDateString}</p>
-                                    </div>
+                            {/* <div className="color"> */}
+                            <div className="board_line" style={{ background: col }}></div>
+                            <div className="signal_color"  >
+                                <div className="circle" style={{ background: col }}></div>
+                                <div className="line" style={{ borderLeft: "1.5px dashed" + col }}></div>
+                            </div>
+                            {/* </div> */}
+                            <div className="text_group">
+                                <div>
+                                    <p className="item_1">{matchMapping[item.state].description}</p>
+                                    <p className="item_2">{item.name}</p>
+                                    <p className="item_3">{item.target_name}</p>
+                                    <p className="item_5">{item.label}</p>
+                                    <p class="item_4">{cDateString}</p>
                                 </div>
                             </div>
-
+                        </div>
                     )
                 })
-            }
-        </ui >)
+            )}
+        </div>
+    );
+
 
 
     // <ui>

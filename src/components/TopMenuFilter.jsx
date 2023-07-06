@@ -16,13 +16,13 @@ const TopMenuFilter = () => {
     const placeholderText = 'Поиск';
 
     return (
-        <div class="top_menu">
+        <div className="top_menu">
 
-            <div class="filter_group">
-                <div class="search">
-                    <div class="search_group">
-                        <button onClick={processText}><img class="loupe_btn" src="" /></button>
-                        <div class="search_title"><input className="text_area"
+            <div className="filter_group">
+                <div className="search">
+                    <div className="search_group">
+                        <button onClick={processText}><img className="loupe_btn" src="" /></button>
+                        <div className="search_title"><input className="text_area"
                             type="text"
                             value={inputText}
                             placeholder={placeholderText}
@@ -30,8 +30,8 @@ const TopMenuFilter = () => {
                         /></div>
                     </div>
                 </div>
-                <div class="filter_btn">
-                    <img class="filter_img" src="" />
+                <div className="filter_btn">
+                    <img className="filter_img" src="" />
                 </div>
             </div>
         </div >

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import TimeFilter from "./TimeFilter";
 import "rsuite/dist/rsuite.min.css";
 import { Nav, Sidenav, Collapse, Sidebar, Toggle, Dropdown } from "rsuite";
 import { Icon } from "@rsuite/icons";
@@ -15,6 +16,22 @@ const CollapseMenu = () => {
 
     const handleToggle = () => {
         setCollapsed(!collapsed);
+    };
+
+    const [result, setResult] = useState(null);
+
+
+    const [selectedOption, setSelectedOption] = useState(true);
+
+    useEffect(() => {
+        setResult(TimeFilter('withinHour'));
+        setSelectedOption('withinHour');
+    }, []);
+
+
+    const handleButtonClick = (option) => {
+        setResult(TimeFilter(option));
+        setSelectedOption(option);
     };
 
 
@@ -35,7 +52,18 @@ const CollapseMenu = () => {
                             <Nav id="menuItems">
                                 {!collapsed && (
                                     <>
-                                        <TopMenu />
+                                        <div className="top_menu">
+                                            <div className="big_period_group">
+                                                <div className="period_group">
+                                                    <button className={selectedOption === 'withinHour' ? 'p_active' : 'period'}
+                                                        onClick={() => handleButtonClick('withinHour')}>Час</button>
+                                                    <button className={selectedOption === 'today' ? 'p_active' : 'period'}
+                                                        onClick={() => handleButtonClick('today')}>Сегодня</button>
+                                                    <button className={selectedOption === 'yesterday' ? 'p_active' : 'period'}
+                                                        onClick={() => handleButtonClick('yesterday')}>Вчера</button>
+                                                </div>
+                                            </div>
+                                        </div >
                                     </>
                                 )}
                             </Nav>
@@ -58,7 +86,7 @@ const CollapseMenu = () => {
                         {!collapsed && (
                             <>
                                 <TopMenuFilter />
-                                <Cards />
+                                <Cards itemValue={result} />
                             </>
                         )}
                     </Nav>

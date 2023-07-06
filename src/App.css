@@ -97,6 +97,10 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   border: solid blue;
 }
 
+ul#menuItems {
+  margin-bottom: 0px;
+}
+
 .card {
   align-items: center;
   background-color: #ffffff;
