@@ -4,7 +4,7 @@ import { Nav, Sidenav, Collapse, Sidebar, Toggle, Dropdown } from "rsuite";
 import { Icon } from "@rsuite/icons";
 
 import TopMenu from "./TopMenu";
-import Card from "./Card";
+import Cards from "./Cards";
 import NavItem from "rsuite/esm/Nav/NavItem";
 import TopMenuFilter from "./TopMenuFilter";
 
@@ -35,10 +35,7 @@ const CollapseMenu = () => {
                             <Nav id="menuItems">
                                 {!collapsed && (
                                     <>
-                                        {/* <div className="d-flex"> */}
                                         <TopMenu />
-                                        {/* <NavItem><TopMenu /></NavItem> */}
-
                                     </>
                                 )}
                             </Nav>
@@ -54,27 +51,17 @@ const CollapseMenu = () => {
                             </Sidenav.Header>
                         </div>
                     </div>
-
                 </div>
-
 
                 <Sidenav.Body>
                     <Nav id="menuItems">
                         {!collapsed && (
                             <>
-                                {/* </div> */}
-                                {/* <div className="d-flex"> */}
                                 <TopMenuFilter />
-                                <Card />
-                               
-
-                                {/* </div> */}
-
+                                <Cards />
                             </>
                         )}
-
                     </Nav>
-
                 </Sidenav.Body>
             </Sidenav>
         </Sidebar>

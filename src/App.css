@@ -344,7 +344,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 
 
-      .period:active {
+      .p_active {
         align-items: center;
         background-color: #93959a;
         border-radius: 0.4rem;
@@ -363,6 +363,8 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
         width: 7.5rem;
         border-style: none;
       }
+
+
 
       .period {
         align-items: center;
