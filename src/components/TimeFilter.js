@@ -1,7 +1,6 @@
-import Card from "./Cards";
 import json from "./jsonConsole.json";
 var cardList = json.data.alerts;
-function TimeFilter(filterOption) {
+function TimeFilter(filterOption, filterData) {
     const sortData = [];
     const currentTime = Date.now();
     cardList.map((item) => {
@@ -18,26 +17,14 @@ function TimeFilter(filterOption) {
         const startOfWithinAnHour = currentTime - 3600000;
 
         if (filterOption === 'withinHour' && transmittedDate >= startOfWithinAnHour && transmittedDate <= currentTime) {
-            // console.log(item);
             sortData.push(item);
-            // return item;
-            // nu = item;
-            // return '1';
-
         } else if (filterOption === 'today' && transmittedDate >= startOfToday && transmittedDate <= endOfToday) {
-            // console.log(item);
-            // nu = item;
             sortData.push(item);
-            // return '2';
-            // return item;
-            // console.log(item);
         } else if (filterOption === 'yesterday' && transmittedDate >= startOfYesterday && transmittedDate <= endOfYesterday) {
-            // console.log(item);
-            // nu = item;
             sortData.push(item);
-            // return item;
         }
     });
+
     return sortData;
 }
 

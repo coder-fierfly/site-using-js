@@ -3,6 +3,20 @@
   pointer-events: none;
 }
 
+.popup {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(107, 114, 128, 0.5);
+  /* background-color: white; */
+  width: 100%;
+  min-height: 100vh;
+  z-index: 2
+}
+
+
+
 a.rs-nav-item {
   padding-top: 0rem;
   padding-left: 0rem;
@@ -95,6 +109,10 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   position: absolute;
   right: 100%;
   border: solid blue;
+}
+
+.withoutColor {
+  background-color: white;
 }
 
 ul#menuItems {
@@ -413,6 +431,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
     }
   }
 
+
   .filter_group {
     align-items: center;
     display: flex;
@@ -426,12 +445,13 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
       border-radius: 0.4rem;
       box-sizing: border-box;
       flex-shrink: 0;
-      height: 100%;
+
       margin-right: 1.2rem;
       overflow: hidden;
       padding: 0.6rem 1.5rem;
       position: relative;
-      width: 22.4rem;
+      width: 224px;
+      height: 32px;
 
       .search_group {
         align-items: center;
@@ -440,12 +460,16 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
         width: 8.3rem;
 
         .loupe_btn {
-          flex-shrink: 0;
-          height: 1.75rem;
-          margin: 0rem 1.15rem 0.05rem 0rem;
-          object-fit: contain;
-          vertical-align: top;
-          width: 1.75rem;
+          background-color: white;
+          height: 24px;
+          width: 24px;
+          /* margin-bottom: 5px; */
+          margin-right: 8px;
+
+
+          .search_svg {
+            fill: #93959A;
+          }
         }
 
         .search_title {
@@ -463,20 +487,21 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
     .filter_btn {
       background-color: #ffffff;
+      width: 32px;
+      height: 32px;
+      padding: 14px 12px;
       border-radius: 0.4rem;
       box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1199999973);
       box-sizing: border-box;
-      flex-shrink: 0;
-      height: 100%;
-      overflow: hidden;
-      padding: 0.7rem 0.8rem 0.7rem 0.8rem;
-      position: relative;
 
-      .filter_img {
-        height: 1.8003rem;
-        object-fit: contain;
-        vertical-align: top;
-        width: 1.6003rem;
+
+
+
+      .filter_svg {
+        position: relative;
+        bottom: 10px;
+        right: 7.5px;
+        fill: #93959A;
       }
     }
   }

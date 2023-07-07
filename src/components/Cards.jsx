@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import json from "./jsonConsole.json";
+import MatchMapping from "../MatshMapping";
 
 
 var quotList = json.data.alerts;
@@ -8,42 +9,6 @@ var cardList = json.data.alerts;
 const matrixArray = [];
 // const TimeFilter = require('./TimeFilter.jsx');
 
-const matchMapping = {
-
-    1: {
-        color: "#38C25D",
-        description: "Штатно"
-    },
-    2: {
-        color: "#FFCA31",
-        description: "Сигнализация"
-    },
-    3: {
-        color: "#EA4335",
-        description: "Риск аварии"
-    },
-    4: {
-        color: "#AD2C72",
-        description: "Критические события"
-    },
-    5: {
-        color: "#858B99",
-        description: "Нет данных"
-    },
-    6: {
-        color: "#D9E2EC",
-        description: ""
-    },
-    7: {
-        color: "#4285F4",
-        description: "Резерв"
-    },
-    0: {
-        color: "#4285F4",
-        description: "Резерв"
-    }
-
-};
 
 const Cards = (props) => {
 
@@ -83,11 +48,11 @@ const Cards = (props) => {
     return (
         <div>
             {props.itemValue.length === 0 ? (
-                <p>No elements found.</p>
+                <div className="withoutColor">Нет подходящих элементов</div>
             ) : (
                 props.itemValue.map((item) => {
 
-                    var col = matchMapping[item.state].color;
+                    var col = MatchMapping[item.state].color;
                     // console.log((new Date(item.time_value * 1000)));
                     var convertDate = new Date(item.time_value * 1000);
                     var cDateString = convertDate.toDateString();
@@ -103,7 +68,7 @@ const Cards = (props) => {
                     }).replace(/\//g, '.').replace(/,/g, '');
 
                     return (
-                        <div className="card">
+                        <div className="card" id={item.event_id}   >
                             {/* <div className="color"> */}
                             <div className="board_line" style={{ background: col }}></div>
                             <div className="signal_color"  >
@@ -113,11 +78,11 @@ const Cards = (props) => {
                             {/* </div> */}
                             <div className="text_group">
                                 <div>
-                                    <p className="item_1">{matchMapping[item.state].description}</p>
+                                    <p className="item_1">{MatchMapping[item.state].description}</p>
                                     <p className="item_2">{item.name}</p>
                                     <p className="item_3">{item.target_name}</p>
                                     <p className="item_5">{item.label}</p>
-                                    <p class="item_4">{cDateString}</p>
+                                    <p className="item_4">{cDateString}</p>
                                 </div>
                             </div>
                         </div>
@@ -126,27 +91,6 @@ const Cards = (props) => {
             )}
         </div>
     );
-
-
-
-    // <ui>
-    //     {
-    //         cardList.forEach(item => {
-    //             const row = [
-    //                 item.state,
-    //                 item.name,
-    //                 item.target_name,
-    //                 item.time_value,
-    //                 item.label
-    //             ];
-    //             matrixArray.push(row);
-    //         })}
-    //     <div>{matrixArray[0][0]}</div>
-    //     <div>{matrixArray[0][1]}</div>
-    // </ui>
-    // )
-
-
 }
 
 export default Cards;
