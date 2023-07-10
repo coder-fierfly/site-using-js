@@ -13,12 +13,11 @@ function ColorTypeFilter(filterOption, result) {
                     sortData.push(item)
                 }
                 //по состоянию
-            } else if (item.label == element) {
+            } else if (item.label === element) {
                 sortData.push(item);
             }
         });
     });
-    console.log(sortData);
     return sortData;
 }
 

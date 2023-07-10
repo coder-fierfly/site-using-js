@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FilterPopup = ({ onClose, onApply }) => {
+const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   const handleFilterChange = (event) => {
@@ -19,125 +19,144 @@ const FilterPopup = ({ onClose, onApply }) => {
     onClose();
   };
 
+  console.log(selectedOptions)
   return (
     <div className="popup">
       <div className="popup-content">
-        <h2>Filters</h2>
+        <div className='checkbox_group'>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="1"
+                defaultChecked={selectedOptions.includes("1")}
+                onChange={handleFilterChange}
+              />
+              <div className="square green_sq"></div>
+              {/* зеленый квадрат */}
+            </label>
+          </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="2"
+                defaultChecked={selectedOptions.includes("2")}
+                onChange={handleFilterChange}
+              />
+              <div className="square yellow_sq"></div>
+            </label>
+          </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="3"
+                defaultChecked={selectedOptions.includes("3")}
+                onChange={handleFilterChange}
+              />
+              <div className="square red_sq"></div>
+            </label>
+          </div>
+        </div>
+        <div className='checkbox_group'>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="4"
+                defaultChecked={selectedOptions.includes("4")}
+                onChange={handleFilterChange}
+              />
+              <div className="square crime_sq"></div>
+            </label>
+          </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="5"
+                defaultChecked={selectedOptions.includes("5")}
+                onChange={handleFilterChange}
+              />
+              <div className="square grey_sq"></div>
+            </label>
+          </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="6"
+                defaultChecked={selectedOptions.includes("6")}
+                onChange={handleFilterChange}
+              />
+              <div className="square lb_sq"></div>
+            </label>
+          </div>
+        </div>
+        <div className='checkbox_group'>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="7"
+                defaultChecked={selectedOptions.includes("7")}
+                onChange={handleFilterChange}
+              />
+              <div className="square blue_sq"></div>
+            </label>
+          </div>
 
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="1"
-              onChange={handleFilterChange}
-            />
-            зеленый квадрат
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="2"
-              onChange={handleFilterChange}
-            />
-            yellow
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="3"
-              onChange={handleFilterChange}
-            />
-            red
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="4"
-              onChange={handleFilterChange}
-            />
-            crime
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="5"
-              onChange={handleFilterChange}
-            />
-            grey
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="6"
-              onChange={handleFilterChange}
-            />
-            light_blue
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="7"
-              onChange={handleFilterChange}
-            />
-            blue
-          </label>
-        </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="C1"
+                defaultChecked={selectedOptions.includes("C1")}
+                onChange={handleFilterChange}
+              />
+              <div className="square word">C1</div>
 
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="С1"
-              onChange={handleFilterChange}
-            />
-            C1
-          </label>
+            </label>
+          </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="C2"
+                defaultChecked={selectedOptions.includes("C2")}
+                onChange={handleFilterChange}
+              />
+              <div className="square word">C2</div>
+            </label>
+          </div>
         </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="С2"
-              onChange={handleFilterChange}
-            />
-            C2
-          </label>
+        <div className='checkbox_group'>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="C3"
+                defaultChecked={selectedOptions.includes("C3")}
+                onChange={handleFilterChange}
+              />
+              <div className="square word">C3</div>
+            </label>
+          </div>
+          <div className='checkbox_line'>
+            <label>
+              <input className='checkbox'
+                type="checkbox"
+                value="C4"
+                defaultChecked={selectedOptions.includes("C4")}
+                onChange={handleFilterChange}
+              />
+              <div className="square word">C4</div>
+            </label>
+          </div>
         </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="С3"
-              onChange={handleFilterChange}
-            />
-            C3
-          </label>
-        </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value="C4"
-              onChange={handleFilterChange}
-            />
-            C4
-          </label>
-        </div>
-        {/* Add more filter checkboxes as needed */}
-        <button onClick={handleApply}>Apply Filters</button>
-        <button onClick={onClose}>Close</button>
+        <button className='apply_btn' onClick={handleApply}>
+          <p className='apply'>Применить</p></button>
       </div>
     </div>
   );

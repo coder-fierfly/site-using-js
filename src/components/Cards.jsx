@@ -11,53 +11,17 @@ const matrixArray = [];
 
 
 const Cards = (props) => {
-
-
-
-    // const filt = cardList.filter(item => item.state === 1);
-    // return (
-
-    // парсинг из json
-    // <ui>
-    {/* { */ }
-    // cardList.filter(item => item.state === 1).map(item => {
-    // quotList.map(item => { 
-    // var currentDate = new Date();
-
-    // console.error(item.time_value);
-    // var col = matchMapping[props.itemValue.state].color;
-    // // console.log((new Date(item.time_value * 1000)));
-    // var convertDate = new Date(props.itemValue.time_value * 1000);
-    // var cDateString = convertDate.toDateString();
-    // const sd = new Date(props.itemValue.time_value * 1000);
-    // const formattedDate = sd.toLocaleString('en-US', {
-    //     day: '2-digit',
-    //     month: '2-digit',
-    //     year: 'numeric',
-    //     hour: 'numeric',
-    //     minute: 'numeric',
-    //     second: 'numeric',
-    //     hour12: false
-    // }).replace(/\//g, '.').replace(/,/g, '');
-
-
-
-    // cardList.map((s) => {
-
-
+    const currentTime = Date.now();
     return (
         <div>
             {props.itemValue.length === 0 ? (
                 <div className="withoutColor">Нет подходящих элементов</div>
             ) : (
                 props.itemValue.map((item) => {
-
                     var col = MatchMapping[item.state].color;
-                    // console.log((new Date(item.time_value * 1000)));
-                    var convertDate = new Date(item.time_value * 1000);
-                    var cDateString = convertDate.toDateString();
-                    const sd = new Date(item.time_value * 1000);
-                    const formattedDate = sd.toLocaleString('en-US', {
+                    var minutesAgo = Math.floor((currentTime - item.time_value * 1000) / 60000);
+                    const cd = new Date(item.time_value * 1000);
+                    const formattedDate = cd.toLocaleString('en-US', {
                         day: '2-digit',
                         month: '2-digit',
                         year: 'numeric',
@@ -67,8 +31,15 @@ const Cards = (props) => {
                         hour12: false
                     }).replace(/\//g, '.').replace(/,/g, '');
 
+                    const formattedTime = cd.toLocaleString('en-US', {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric',
+                        hour12: false
+                    }).replace(/\//g, '.').replace(/,/g, '');
+
                     return (
-                        <div className="card" id={item.event_id}   >
+                        <div className="card" key={item.event_id}   >
                             {/* <div className="color"> */}
                             <div className="board_line" style={{ background: col }}></div>
                             <div className="signal_color"  >
@@ -81,8 +52,10 @@ const Cards = (props) => {
                                     <p className="item_1">{MatchMapping[item.state].description}</p>
                                     <p className="item_2">{item.name}</p>
                                     <p className="item_3">{item.target_name}</p>
-                                    <p className="item_5">{item.label}</p>
-                                    <p className="item_4">{cDateString}</p>
+                                    <p className="item_5">Класс опасности: {item.label}</p>
+                                    {props.filter === 'withinHour' ? (<p className="item_4">{minutesAgo}  мин назад</p>) : (null)}
+                                    {props.filter === 'today' ? (<p className="item_4">{formattedTime}</p>) : (null)}
+                                    {props.filter === 'yesterday' ? (<p className="item_4">{formattedDate}</p>) : (null)}
                                 </div>
                             </div>
                         </div>

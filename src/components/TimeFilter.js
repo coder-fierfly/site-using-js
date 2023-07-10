@@ -1,6 +1,6 @@
 import json from "./jsonConsole.json";
 var cardList = json.data.alerts;
-function TimeFilter(filterOption, filterData) {
+function TimeFilter(filterOption) {
     const sortData = [];
     const currentTime = Date.now();
     cardList.map((item) => {
