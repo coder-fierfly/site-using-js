@@ -1,6 +1,3 @@
-import json from "./jsonConsole.json";
-var cardList = json.data.alerts;
-
 function ColorTypeFilter(filterOption, result) {
     const sortData = [];
     //элемент из фильтра
@@ -18,7 +15,8 @@ function ColorTypeFilter(filterOption, result) {
             }
         });
     });
-    return sortData;
+    const uniqueValuesSet = [...new Set(sortData)];
+    return uniqueValuesSet;
 }
 
 export default ColorTypeFilter;

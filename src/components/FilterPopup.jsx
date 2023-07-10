@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -14,12 +14,15 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
     }
   };
 
+  useEffect(() => {
+    setSelectedFilters(selectedOptions);
+  }, []);
+
   const handleApply = () => {
     onApply(selectedFilters);
     onClose();
   };
 
-  console.log(selectedOptions)
   return (
     <div className="popup">
       <div className="popup-content">
@@ -59,6 +62,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
             </label>
           </div>
         </div>
+        <div className='c_line'></div>
         <div className='checkbox_group'>
           <div className='checkbox_line'>
             <label>
@@ -94,6 +98,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
             </label>
           </div>
         </div>
+        <div className='c_line'></div>
         <div className='checkbox_group'>
           <div className='checkbox_line'>
             <label>
@@ -131,6 +136,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
             </label>
           </div>
         </div>
+        <div className='c_line'></div>
         <div className='checkbox_group'>
           <div className='checkbox_line'>
             <label>

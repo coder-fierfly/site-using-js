@@ -9,8 +9,9 @@ import ColorTypeFilter from './ColorTypeFilter';
 
 import MatchMapping from "../MatshMapping";
 
-// провезти линию медлу филттрами
-// отформатировать дату
+// открытие карточки
+// сделать листание страниц в карточках
+
 const CollapseMenu = () => {
 
     const cancelFilter = (index) => {
@@ -18,10 +19,7 @@ const CollapseMenu = () => {
         buffFilter = buffFilter.concat(selectedFilters);
         buffFilter.splice(index, 1);
         setSelectedFilters(buffFilter);
-        // applyFilters();
-        // setFilter(ColorTypeFilter(filters, result));
-        // setSelectedFilters
-        console.log('закрываем' + index)
+        applyFilters(buffFilter);
     }
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -39,7 +37,6 @@ const CollapseMenu = () => {
     // Выбранные фильтры их потом надо будет отображать.
     const [selectedFilters, setSelectedFilters] = useState([]);
     var applyFilters = (filters) => {
-        console.log('эть')
         setSelectedFilters(filters);
         setFilter(ColorTypeFilter(filters, result));
     };
@@ -73,19 +70,10 @@ const CollapseMenu = () => {
 
     //Срабатывание по кнопке
     const handleButtonClick = (option) => {
-        console.log("время");
-        setResult(TimeFilter(option));
-        // setResult(TimeFilter(option));
+        var filteredBuff = TimeFilter(option)
+        setResult(filteredBuff);
         setSelectedOption(option);
-        //TODO сделать перерисовку при применении фильтров
-        // if (selectedFilters.length > 0) {
-        //     // console.log('HEHE')
-        //     // setFilter(ColorTypeFilter(filters, result));
-        //     // setSelectedFilters(filters);
-        //     // setFilter(ColorTypeFilter(filters, aaa));
-        //     // setSelectedFilters(filters);
-
-        // }
+        setFilter(ColorTypeFilter(selectedFilters, filteredBuff));
     };
 
     var propToPass = [];
@@ -210,7 +198,6 @@ const CollapseMenu = () => {
                                         }
                                     </div >
                                 ) : (null)}
-
                                 <Cards itemValue={propToPass} filter={selectedOption} />
                             </>
                         )}
