@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import TimeFilter from "./TimeFilter";
 import "rsuite/dist/rsuite.min.css";
 import { Nav, Sidenav, Sidebar } from "rsuite";
@@ -6,11 +6,18 @@ import { Nav, Sidenav, Sidebar } from "rsuite";
 import Cards from "./Cards";
 import FilterPopup from './FilterPopup';
 import ColorTypeFilter from './ColorTypeFilter';
+import TextAreaFilter from './TextAreaFilter';
 
 import MatchMapping from "../MatshMapping";
 
-// открытие карточки
+
 // сделать листание страниц в карточках
+// поиск более точный
+// поиск по штатно и т.д. надпись
+// скролл и пейджинг
+// открытие карточки
+
+let PageSize = 10;
 
 const CollapseMenu = () => {
 
@@ -41,17 +48,6 @@ const CollapseMenu = () => {
         setFilter(ColorTypeFilter(filters, result));
     };
 
-    const [inputText, setInputText] = useState('');
-
-    const handleInputChange = (event) => {
-        setInputText(event.target.value);
-    };
-
-    //todo обработка
-    const processText = () => {
-        console.log(inputText);
-    };
-
     // Открытие и закрытие меню
     const [collapsed, setCollapsed] = useState(true);
 
@@ -73,21 +69,78 @@ const CollapseMenu = () => {
         var filteredBuff = TimeFilter(option)
         setResult(filteredBuff);
         setSelectedOption(option);
-        setFilter(ColorTypeFilter(selectedFilters, filteredBuff));
+        if (selectedFilters.length > 0) {
+            setFilter(ColorTypeFilter(selectedFilters, filteredBuff));
+        }
     };
+
+    // Текст из поля ввода
+    const [inputText, setInputText] = useState('');
+    // Отфильтрованные по тексту данные
+    const [filteredByText, setFilterText] = useState([]);
+
+    // const handleInputChange = (event) => {
+    //     setInputText(event.target.value);
+    // };
+
+    //todo обработка
+    const processText = () => {
+        var buffValue = document.getElementById('elem1').value
+        setInputText(buffValue);
+
+        if (filterData.length > 0) {
+            setFilterText(TextAreaFilter(buffValue, filterData))
+        } else {
+            setFilterText(TextAreaFilter(buffValue, result))
+        }
+    };
+
+    const [currentPage, setCurrentPage] = useState(1);
 
     var propToPass = [];
     var groupedData = [];
     propToPass = propToPass.concat(result);
-    if (selectedFilters.length > 0) {
-        propToPass.length = 0;
-        propToPass = propToPass.concat(filterData);
+    if (result.length > 0) {
+        if ((selectedFilters.length > 0) && (inputText !== '')) {
 
-        for (let i = 0; i < selectedFilters.length; i += 4) {
-            groupedData.push(selectedFilters.slice(i, i + 4));
+            for (let i = 0; i < selectedFilters.length; i += 4) {
+                groupedData.push(selectedFilters.slice(i, i + 4));
+            }
+            propToPass.length = 0;
+            propToPass = propToPass.concat(TextAreaFilter(inputText, filterData))
+        } else {
+            if (selectedFilters.length > 0) {
+                propToPass.length = 0;
+                propToPass = propToPass.concat(filterData);
+
+                for (let i = 0; i < selectedFilters.length; i += 4) {
+                    groupedData.push(selectedFilters.slice(i, i + 4));
+                }
+            }
+            if (inputText !== '') {
+                propToPass.length = 0;
+                propToPass = propToPass.concat(filteredByText);
+            }
         }
     }
 
+
+    const itemsPerPage = 2;
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(propToPass.length / itemsPerPage);
+
+    // Calculate the index of the first and last item to display on the current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    // Get the current items to display based on the index range
+    const currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Function to handle page changes
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
 
     return (
@@ -148,9 +201,10 @@ const CollapseMenu = () => {
                                                 </button>
                                                 <div className="search_title"><input className="text_area"
                                                     type="text"
-                                                    value={inputText}
+                                                    id="elem1"
+
                                                     placeholder={'Поиск'}
-                                                    onChange={handleInputChange}
+                                                // onChange={handleInputChange}
                                                 /></div>
                                             </div>
                                         </div>
@@ -173,7 +227,7 @@ const CollapseMenu = () => {
                                 </div >
                                 {selectedFilters.length !== 0 ? (
                                     <div>
-                                        {groupedData.map((element, index) => {
+                                        {groupedData.map((element) => {
                                             return (
                                                 <div className="selected_filters">
                                                     {element.map((item, itemIndex) => (
@@ -192,13 +246,26 @@ const CollapseMenu = () => {
                                                         </div >
                                                     ))}
                                                 </div>
-                                                // <SelectedFilter key={index} data={item} />
                                             )
                                         })
                                         }
                                     </div >
                                 ) : (null)}
+
+                                {/* <Cards itemValue={currentItems} filter={selectedOption} /> */}
                                 <Cards itemValue={propToPass} filter={selectedOption} />
+                                <div>
+                                    {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                                        <button
+                                            key={pageNumber}
+                                            onClick={() => handlePageChange(pageNumber)}
+                                            disabled={currentPage === pageNumber}
+                                        >
+                                            {pageNumber}
+                                        </button>
+                                    ))}
+                                </div>
+
                             </>
                         )}
                     </Nav>

@@ -61,9 +61,6 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               <div className="square red_sq"></div>
             </label>
           </div>
-        </div>
-        <div className='c_line'></div>
-        <div className='checkbox_group'>
           <div className='checkbox_line'>
             <label>
               <input className='checkbox'
@@ -75,6 +72,10 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               <div className="square crime_sq"></div>
             </label>
           </div>
+        </div>
+
+        <div className='checkbox_group c_line'>
+
           <div className='checkbox_line'>
             <label>
               <input className='checkbox'
@@ -97,9 +98,6 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               <div className="square lb_sq"></div>
             </label>
           </div>
-        </div>
-        <div className='c_line'></div>
-        <div className='checkbox_group'>
           <div className='checkbox_line'>
             <label>
               <input className='checkbox'
@@ -111,6 +109,9 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               <div className="square blue_sq"></div>
             </label>
           </div>
+        </div>
+        {/* <div className='c_line'></div> */}
+        <div className='checkbox_group'>
 
           <div className='checkbox_line'>
             <label>
@@ -135,9 +136,6 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               <div className="square word">C2</div>
             </label>
           </div>
-        </div>
-        <div className='c_line'></div>
-        <div className='checkbox_group'>
           <div className='checkbox_line'>
             <label>
               <input className='checkbox'
