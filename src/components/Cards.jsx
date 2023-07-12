@@ -13,6 +13,8 @@ const matrixArray = [];
 
 const Cards = (props) => {
     const currentTime = Date.now();
+    console.log('cards')
+    console.log(props.itemValue)
     return (
         <div>
             {props.itemValue.length === 0 ? (

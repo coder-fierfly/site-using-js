@@ -7,15 +7,17 @@ import Cards from "./Cards";
 import FilterPopup from './FilterPopup';
 import ColorTypeFilter from './ColorTypeFilter';
 import TextAreaFilter from './TextAreaFilter';
-
+import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import MatchMapping from "../MatshMapping";
 
 
 // сделать листание страниц в карточках
-// поиск более точный
-// поиск по штатно и т.д. надпись
 // скролл и пейджинг
 // открытие карточки
+
+const ITEMS_PER_PAGE = 2;
 
 let PageSize = 10;
 
@@ -85,6 +87,7 @@ const CollapseMenu = () => {
 
     //todo обработка
     const processText = () => {
+        console.log('asd')
         var buffValue = document.getElementById('elem1').value
         setInputText(buffValue);
 
@@ -95,14 +98,13 @@ const CollapseMenu = () => {
         }
     };
 
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
 
     var propToPass = [];
     var groupedData = [];
     propToPass = propToPass.concat(result);
     if (result.length > 0) {
         if ((selectedFilters.length > 0) && (inputText !== '')) {
-
             for (let i = 0; i < selectedFilters.length; i += 4) {
                 groupedData.push(selectedFilters.slice(i, i + 4));
             }
@@ -112,35 +114,44 @@ const CollapseMenu = () => {
             if (selectedFilters.length > 0) {
                 propToPass.length = 0;
                 propToPass = propToPass.concat(filterData);
-
                 for (let i = 0; i < selectedFilters.length; i += 4) {
                     groupedData.push(selectedFilters.slice(i, i + 4));
                 }
             }
             if (inputText !== '') {
+                console.log('ehhe')
                 propToPass.length = 0;
-                propToPass = propToPass.concat(filteredByText);
+                propToPass = propToPass.concat(TextAreaFilter(inputText, result));
             }
         }
     }
 
 
-    const itemsPerPage = 2;
+
 
     // Calculate the total number of pages
-    const totalPages = Math.ceil(propToPass.length / itemsPerPage);
+    const totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
 
-    // Calculate the index of the first and last item to display on the current page
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-    // Get the current items to display based on the index range
-    const currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
 
     // Function to handle page changes
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
+    const [page, setPage] = React.useState(1);
+    const handlePageChange = (_, value) => {
+        setPage(value);
     };
+
+    // // Calculate the index of the first and last item to display on the current page
+    const indexOfLastItem = page * ITEMS_PER_PAGE;
+    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+
+    console.log(propToPass);
+
+    // // Get the current items to display based on the index range
+    console.log('indexOfFirstItem ' + indexOfFirstItem);
+    console.log('indexOfLastItem ' + indexOfLastItem)
+    const currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
+    console.log(currentItems);
+
 
 
     return (
@@ -252,19 +263,15 @@ const CollapseMenu = () => {
                                     </div >
                                 ) : (null)}
 
-                                {/* <Cards itemValue={currentItems} filter={selectedOption} /> */}
-                                <Cards itemValue={propToPass} filter={selectedOption} />
-                                <div>
-                                    {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                                        <button
-                                            key={pageNumber}
-                                            onClick={() => handlePageChange(pageNumber)}
-                                            disabled={currentPage === pageNumber}
-                                        >
-                                            {pageNumber}
-                                        </button>
-                                    ))}
-                                </div>
+
+                                <Cards itemValue={currentItems} filter={selectedOption} />
+                        
+                                {totalPages > 1 ? <Pagination
+                                    count={totalPages}
+                                    page={page}
+                                    onChange={handlePageChange}
+                                    color="primary"
+                                /> : null}
 
                             </>
                         )}
