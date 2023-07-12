@@ -43,6 +43,62 @@
   left: 0;
 }
 
+.main_cards_wrapper {
+  height: 81vh;
+}
+
+.cards_wrapper {
+  width: 100%;
+  height: 81vh;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: auto;
+  transform-origin: top center;
+}
+
+.cards_wrapper::-webkit-scrollbar {
+  width: 8px;
+  /* Set the width of the scrollbar */
+}
+
+.cards_wrapper::-webkit-scrollbar-thumb {
+  background-color: #888;
+  /* Set the color of the scrollbar thumb */
+  border-radius: 4px;
+  /* Round the edges of the scrollbar thumb */
+}
+
+.cards_wrapper::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  /* Set the color of the scrollbar track */
+  border-radius: 4px;
+  /* Round the edges of the scrollbar track */
+}
+
+.css-pwj874-MuiStack-root {
+  display: block !important;
+}
+
+.pagination-wrapper {
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+
+  bottom: 0vh;
+  height: 40px;
+  /* width: 300px; */
+  width: 100%;
+
+  background-color: #4285F4;
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: auto; */
+  /* margin-top: 10px; */
+  /* Add spacing if needed */
+}
+
 .apply_btn {
   box-shadow: 0px 4px 10px 0px #0000001F;
   background: #FFFFFF;
@@ -154,11 +210,30 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   float: none !important;
 }
 
+.page_btn {
+  height: 40px;
+  /* position: absolute; */
+}
+
+.two_arr_left {
+  float: right;
+}
+
+.page_placeholder {
+  width: 30px;
+  height: 40px;
+  /* position: absolute; */
+}
+
 .line_element {
   display: inline-block;
+}
 
-  /* Размещает элементы в одной строке */
-
+.bottom_line_element {
+  /* flex: 1; */
+  text-align: center;
+  margin: auto;
+  display: table-cell;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -201,6 +276,18 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   display: flex;
   flex-direction: column;
 
+}
+
+/* nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
+  position: absolute;
+  height: 100%;
+  background-color: #FFFFFF;
+} */
+
+ul#menuItems {
+  position: static;
+  /* height: 90%; */
+  white-space: nowrap;
 }
 
 .menuBtn {

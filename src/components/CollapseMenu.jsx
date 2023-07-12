@@ -7,8 +7,9 @@ import Cards from "./Cards";
 import FilterPopup from './FilterPopup';
 import ColorTypeFilter from './ColorTypeFilter';
 import TextAreaFilter from './TextAreaFilter';
+import { Pagination, TextField, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import Pagination from '@mui/material/Pagination';
+// import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import MatchMapping from "../MatshMapping";
 
@@ -17,9 +18,72 @@ import MatchMapping from "../MatshMapping";
 // скролл и пейджинг
 // открытие карточки
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 5;
 
 let PageSize = 10;
+
+const PaginationWithInput = ({ currentPage, totalPages, onChange }) => {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleInputBlur = () => {
+        const pageNumber = parseInt(inputValue, 10);
+        if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
+            onChange(pageNumber);
+        } else {
+            setInputValue(currentPage.toString());
+        }
+    };
+
+    const handlePaginationChange = (event, newPage) => {
+        onChange(newPage);
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            onChange(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            onChange(currentPage + 1);
+        }
+    };
+
+    return (
+        <>
+            <Button onClick={handlePrevPage} disabled={currentPage === 1}>
+                Previous
+            </Button>
+            <Pagination
+                page={currentPage}
+                count={totalPages}
+                onChange={handlePaginationChange}
+                showFirstButton
+                showLastButton
+            />
+            <Button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                Next
+            </Button>
+            <TextField
+                type="number"
+                value={inputValue}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                inputProps={{
+                    min: 1,
+                    max: totalPages,
+                    style: { width: 50, textAlign: 'center' },
+                }}
+            />
+            <span>of {totalPages}</span>
+        </>
+    );
+};
 
 const CollapseMenu = () => {
 
@@ -262,21 +326,58 @@ const CollapseMenu = () => {
                                         }
                                     </div >
                                 ) : (null)}
-
-
-                                <Cards itemValue={currentItems} filter={selectedOption} />
-                        
-                                {totalPages > 1 ? <Pagination
+                                <div className='main_cards_wrapper'>
+                                    <div className='cards_wrapper'>
+                                        <Cards itemValue={currentItems} filter={selectedOption} />
+                                    </div>
+                                </div>
+                                {/* {totalPages > 1 ? <div className="pagination-wrapper"> <Stack spacing={2}><Pagination
                                     count={totalPages}
                                     page={page}
                                     onChange={handlePageChange}
                                     color="primary"
-                                /> : null}
+                                    siblingCount={0}
+                                // boundaryCount={0}
+                                /><div class="scroll-div"></div></Stack></div> : null} */}
+
+                                {/* {totalPages > 1 ? <div className="pagination-wrapper"> <button>ЛЛ</button><button>Л</button>Страницы:<input className=""
+                                                    type="text"                 
+
+                                                    placeholder={'Поиск'}
+
+                                                /></div><button>Р</button><button>РР</button></div> : null} */}
+                                <div className="pagination-wrapper">
+                                    <button className='page_btn bottom_line_element'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="M453-241 213-481l240-240 42 42-198 198 198 198-42 42Zm253 0L466-481l240-240 42 42-198 198 198 198-42 42Z" /></svg>
+                                    </button>
+                                    <button className='page_btn bottom_line_element' onClick={processText}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z" /></svg>
+                                    </button>
+                                    <div className='bottom_line_element'><p>Страница:</p></div>
+
+                                    <input className="page_placeholder bottom_line_element"
+                                        type="text"
+                                        placeholder={page}></input>
+
+                                    <button className='page_btn  bottom_line_element'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m375-240-43-43 198-198-198-198 43-43 241 241-241 241Z" /></svg>
+                                    </button>
+                                    <button className='page_btn  bottom_line_element'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m255-241-42-42 198-198-198-198 42-42 240 240-240 240Zm253 0-42-42 198-198-198-198 42-42 240 240-240 240Z" /></svg>
+                                    </button>
+
+                                    <div className='bottom_line_element'>из</div>
+                                    <div className='bottom_line_element'>3</div>
+                                    <div className='bottom_line_element'>кол-во</div>
+
+                                </div>
 
                             </>
                         )}
                     </Nav>
                 </Sidenav.Body>
+
+
             </Sidenav>
         </Sidebar>
     );
