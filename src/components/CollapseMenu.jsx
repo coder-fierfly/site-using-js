@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TimeFilter from "./TimeFilter";
 import "rsuite/dist/rsuite.min.css";
 import { Nav, Sidenav, Sidebar } from "rsuite";
@@ -7,83 +7,13 @@ import Cards from "./Cards";
 import FilterPopup from './FilterPopup';
 import ColorTypeFilter from './ColorTypeFilter';
 import TextAreaFilter from './TextAreaFilter';
-import { Pagination, TextField, Button } from '@mui/material';
-import Typography from '@mui/material/Typography';
-// import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
 import MatchMapping from "../MatshMapping";
 
 
-// сделать листание страниц в карточках
-// скролл и пейджинг
+
 // открытие карточки
 
 const ITEMS_PER_PAGE = 5;
-
-let PageSize = 10;
-
-const PaginationWithInput = ({ currentPage, totalPages, onChange }) => {
-    const [inputValue, setInputValue] = useState('');
-
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
-
-    const handleInputBlur = () => {
-        const pageNumber = parseInt(inputValue, 10);
-        if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
-            onChange(pageNumber);
-        } else {
-            setInputValue(currentPage.toString());
-        }
-    };
-
-    const handlePaginationChange = (event, newPage) => {
-        onChange(newPage);
-    };
-
-    const handlePrevPage = () => {
-        if (currentPage > 1) {
-            onChange(currentPage - 1);
-        }
-    };
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            onChange(currentPage + 1);
-        }
-    };
-
-    return (
-        <>
-            <Button onClick={handlePrevPage} disabled={currentPage === 1}>
-                Previous
-            </Button>
-            <Pagination
-                page={currentPage}
-                count={totalPages}
-                onChange={handlePaginationChange}
-                showFirstButton
-                showLastButton
-            />
-            <Button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                Next
-            </Button>
-            <TextField
-                type="number"
-                value={inputValue}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                inputProps={{
-                    min: 1,
-                    max: totalPages,
-                    style: { width: 50, textAlign: 'center' },
-                }}
-            />
-            <span>of {totalPages}</span>
-        </>
-    );
-};
 
 const CollapseMenu = () => {
 
@@ -145,13 +75,7 @@ const CollapseMenu = () => {
     // Отфильтрованные по тексту данные
     const [filteredByText, setFilterText] = useState([]);
 
-    // const handleInputChange = (event) => {
-    //     setInputText(event.target.value);
-    // };
-
-    //todo обработка
     const processText = () => {
-        console.log('asd')
         var buffValue = document.getElementById('elem1').value
         setInputText(buffValue);
 
@@ -162,11 +86,10 @@ const CollapseMenu = () => {
         }
     };
 
-    // const [currentPage, setCurrentPage] = useState(1);
-
     var propToPass = [];
     var groupedData = [];
     propToPass = propToPass.concat(result);
+
     if (result.length > 0) {
         if ((selectedFilters.length > 0) && (inputText !== '')) {
             for (let i = 0; i < selectedFilters.length; i += 4) {
@@ -183,42 +106,62 @@ const CollapseMenu = () => {
                 }
             }
             if (inputText !== '') {
-                console.log('ehhe')
                 propToPass.length = 0;
                 propToPass = propToPass.concat(TextAreaFilter(inputText, result));
             }
         }
     }
 
-
-
-
-    // Calculate the total number of pages
     const totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
-
-
-
-    // Function to handle page changes
     const [page, setPage] = React.useState(1);
-    const handlePageChange = (_, value) => {
-        setPage(value);
-    };
 
-    // // Calculate the index of the first and last item to display on the current page
     const indexOfLastItem = page * ITEMS_PER_PAGE;
     const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-
-    console.log(propToPass);
-
-    // // Get the current items to display based on the index range
-    console.log('indexOfFirstItem ' + indexOfFirstItem);
-    console.log('indexOfLastItem ' + indexOfLastItem)
     const currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
-    console.log(currentItems);
+
+    const handlePageChangeBtn = (amount) => {
+        if (amount > 0) {
+            const newNumber = Math.min(page + amount, totalPages);
+            setPage(newNumber);
+        } else {
+            const newNumber = Math.max(page + amount, 1);
+            setPage(newNumber);
+        }
+    };
+
+    const [style, setStyle] = useState({});
+
+    const [prevValue, setPrevValue] = useState(1);
+
+    const timeoutRef = useRef(null);
+
+    const handleChange = (e) => {
+        clearTimeout(timeoutRef.current);
+        let newValue = e.target.value;
+
+        timeoutRef.current = setTimeout(() => {
+            console.log(newValue)
+            console.log(isNaN(newValue))
+            console.log(newValue < 1)
+            console.log(newValue > totalPages)
+            if (isNaN(newValue) || newValue < 1 || newValue > totalPages) {
+                console.log('чета')
+                setStyle({ border: "2px solid red" });
+                setPage(prevValue);
+            } else {
+                console.log('юпи')
+                setStyle({});
+                setPage(newValue);
+                setPrevValue(newValue);
+            }
+        }, 2000);
+
+    };
 
 
 
     return (
+
         <Sidebar className="SidebarCollapse"
             width={collapsed ? 57 : 300}
             collapsible
@@ -226,6 +169,7 @@ const CollapseMenu = () => {
             <Sidenav className="SidenavCollapse" appearance="default"
                 expanded={!collapsed}
             >
+
                 <div className="in_line">
                     <div className="line_element">
                         <Sidenav.Body>
@@ -279,7 +223,6 @@ const CollapseMenu = () => {
                                                     id="elem1"
 
                                                     placeholder={'Поиск'}
-                                                // onChange={handleInputChange}
                                                 /></div>
                                             </div>
                                         </div>
@@ -326,51 +269,38 @@ const CollapseMenu = () => {
                                         }
                                     </div >
                                 ) : (null)}
+
                                 <div className='main_cards_wrapper'>
                                     <div className='cards_wrapper'>
                                         <Cards itemValue={currentItems} filter={selectedOption} />
                                     </div>
                                 </div>
-                                {/* {totalPages > 1 ? <div className="pagination-wrapper"> <Stack spacing={2}><Pagination
-                                    count={totalPages}
-                                    page={page}
-                                    onChange={handlePageChange}
-                                    color="primary"
-                                    siblingCount={0}
-                                // boundaryCount={0}
-                                /><div class="scroll-div"></div></Stack></div> : null} */}
 
-                                {/* {totalPages > 1 ? <div className="pagination-wrapper"> <button>ЛЛ</button><button>Л</button>Страницы:<input className=""
-                                                    type="text"                 
-
-                                                    placeholder={'Поиск'}
-
-                                                /></div><button>Р</button><button>РР</button></div> : null} */}
-                                <div className="pagination-wrapper">
-                                    <button className='page_btn bottom_line_element'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="M453-241 213-481l240-240 42 42-198 198 198 198-42 42Zm253 0L466-481l240-240 42 42-198 198 198 198-42 42Z" /></svg>
-                                    </button>
-                                    <button className='page_btn bottom_line_element' onClick={processText}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z" /></svg>
-                                    </button>
-                                    <div className='bottom_line_element'><p>Страница:</p></div>
-
-                                    <input className="page_placeholder bottom_line_element"
-                                        type="text"
-                                        placeholder={page}></input>
-
-                                    <button className='page_btn  bottom_line_element'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m375-240-43-43 198-198-198-198 43-43 241 241-241 241Z" /></svg>
-                                    </button>
-                                    <button className='page_btn  bottom_line_element'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m255-241-42-42 198-198-198-198 42-42 240 240-240 240Zm253 0-42-42 198-198-198-198 42-42 240 240-240 240Z" /></svg>
-                                    </button>
-
-                                    <div className='bottom_line_element'>из</div>
-                                    <div className='bottom_line_element'>3</div>
-                                    <div className='bottom_line_element'>кол-во</div>
-
-                                </div>
+                                {totalPages > 1 ?
+                                    <div className="pagination-wrapper">
+                                        <button className='page_btn bottom_line_element' onClick={() => handlePageChangeBtn(-2)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="M453-241 213-481l240-240 42 42-198 198 198 198-42 42Zm253 0L466-481l240-240 42 42-198 198 198 198-42 42Z" /></svg>
+                                        </button>
+                                        <button className='page_btn bottom_line_element' onClick={() => handlePageChangeBtn(-1)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z" /></svg>
+                                        </button>
+                                        <div className='bottom_line_element'><p>Страница:</p></div>
+                                        <input className="page_placeholder bottom_line_element"
+                                            placeholder={page}
+                                            type="text"
+                                            onChange={handleChange}
+                                            style={style}
+                                        ></input>
+                                        <button className='page_btn  bottom_line_element' onClick={() => handlePageChangeBtn(1)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m375-240-43-43 198-198-198-198 43-43 241 241-241 241Z" /></svg>
+                                        </button>
+                                        <button className='page_btn  bottom_line_element' onClick={() => handlePageChangeBtn(2)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m255-241-42-42 198-198-198-198 42-42 240 240-240 240Zm253 0-42-42 198-198-198-198 42-42 240 240-240 240Z" /></svg>
+                                        </button>
+                                        <div className='bottom_line_element'>{page}</div>
+                                        <div className='bottom_line_element'>из</div>
+                                        <div className='bottom_line_element'>{totalPages}</div>
+                                    </div> : null}
 
                             </>
                         )}

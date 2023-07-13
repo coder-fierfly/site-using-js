@@ -44,12 +44,12 @@
 }
 
 .main_cards_wrapper {
-  height: 81vh;
+  height: 80vh;
 }
 
 .cards_wrapper {
   width: 100%;
-  height: 81vh;
+  height: 80vh;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 10px;
@@ -60,21 +60,18 @@
 
 .cards_wrapper::-webkit-scrollbar {
   width: 8px;
+  height: 10px;
   /* Set the width of the scrollbar */
 }
 
 .cards_wrapper::-webkit-scrollbar-thumb {
-  background-color: #888;
-  /* Set the color of the scrollbar thumb */
-  border-radius: 4px;
-  /* Round the edges of the scrollbar thumb */
+  background-color: #C8CCD0B2;
+  border-radius: 6px;
 }
 
 .cards_wrapper::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-  /* Set the color of the scrollbar track */
-  border-radius: 4px;
-  /* Round the edges of the scrollbar track */
+  background-color: #FFFFFF;
+  border-radius: 6px;
 }
 
 .css-pwj874-MuiStack-root {
@@ -86,17 +83,13 @@
   text-align: center;
   vertical-align: middle;
 
-  bottom: 0vh;
+  bottom: 0.7vh;
   height: 40px;
-  /* width: 300px; */
   width: 100%;
 
-  background-color: #4285F4;
+  background-color: #FFFFFF;
   display: flex;
   justify-content: space-between;
-  /* margin-top: auto; */
-  /* margin-top: 10px; */
-  /* Add spacing if needed */
 }
 
 .apply_btn {
@@ -127,9 +120,7 @@
   width: 20px;
   height: 20px;
   border-radius: 3px;
-  /* background: #f447ff; */
   display: inline;
-  /* right: 30px; */
   float: right;
 }
 
@@ -212,7 +203,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 .page_btn {
   height: 40px;
-  /* position: absolute; */
+  fill: #93959A;
 }
 
 .two_arr_left {
@@ -222,7 +213,6 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 .page_placeholder {
   width: 30px;
   height: 40px;
-  /* position: absolute; */
 }
 
 .line_element {
@@ -234,6 +224,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   text-align: center;
   margin: auto;
   display: table-cell;
+  background-color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -244,7 +235,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 .App-header {
   background-color: #282c34;
-  /* min-height: 100vh; */
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -278,15 +269,8 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 }
 
-/* nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
-  position: absolute;
-  height: 100%;
-  background-color: #FFFFFF;
-} */
-
 ul#menuItems {
   position: static;
-  /* height: 90%; */
   white-space: nowrap;
 }
 
@@ -316,7 +300,6 @@ ul#menuItems {
   box-sizing: border-box;
   display: flex;
   flex-shrink: 0;
-  /* height: 13.2rem; */
   overflow: hidden;
   padding-right: 0.8rem;
   position: relative;
@@ -327,7 +310,6 @@ ul#menuItems {
   .board_line {
 
     flex-shrink: 0;
-    /* height: 13.1rem; */
     height: 100%;
     margin: 0rem 1.4rem 0rem 0rem;
     width: 0.2rem;
@@ -344,12 +326,8 @@ ul#menuItems {
     flex-direction: column;
     flex-shrink: 0;
     height: calc(100% - 1.6rem);
-    /* margin: 0.8rem 0.8rem 0.8rem 0rem; */
     width: 1.6rem;
     margin-left: 15px;
-    /* position: relative; */
-    /* padding-bottom: 100%; */
-
 
     .circle {
 
@@ -361,28 +339,11 @@ ul#menuItems {
       position: absolute;
       top: 10px;
       left: 15px;
-
-      /* margin-bottom: calc(100%); */
-
-      /* position: absolute; */
-      /* position: ; */
-      /* margin-bottom: 120px; */
-
-      /* margin-bottom: 85%; */
-      /* top: 10px; */
-      /* bottom: 0; */
-      /* left: 0; */
-      /* right: 0; */
     }
 
     .line {
-
-
-      /* background-color: #ffca30; */
       flex-shrink: 0;
-      /* height: 9.9rem; */
       position: absolute;
-      /* height: 100%; */
       top: 10px;
       bottom: 10px;
       left: 15px;
