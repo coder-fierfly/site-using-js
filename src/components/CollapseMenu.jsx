@@ -8,16 +8,16 @@ import FilterPopup from './FilterPopup';
 import ColorTypeFilter from './ColorTypeFilter';
 import TextAreaFilter from './TextAreaFilter';
 import MatchMapping from "../MatshMapping";
-import SidenavBody from 'rsuite/esm/Sidenav/SidenavBody';
 
-
-
-// открытие карточки
+//сделать основное меню расширяемым
+// неделя
+// месяц год    
 
 const ITEMS_PER_PAGE = 5;
 
 const CollapseMenu = () => {
 
+    //действие при закрытии индикации выбранного фильтра
     const cancelFilter = (index) => {
         var buffFilter = [];
         buffFilter = buffFilter.concat(selectedFilters);
@@ -26,6 +26,7 @@ const CollapseMenu = () => {
         applyFilters(buffFilter);
     }
 
+    //открыто или закрыто всплывающее окно
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const openPopup = () => {
@@ -55,11 +56,11 @@ const CollapseMenu = () => {
     //Выбранная переменная
     const [selectedOption, setSelectedOption] = useState([]);
 
+    //по дефолту выбранный период
     useEffect(() => {
         setResult(TimeFilter('withinHour'));
         setSelectedOption('withinHour');
     }, []);
-
 
     //Срабатывание по кнопке
     const handleButtonClick = (option) => {
@@ -76,21 +77,21 @@ const CollapseMenu = () => {
     // Отфильтрованные по тексту данные
     const [filteredByText, setFilterText] = useState([]);
 
-
+    // фильтрация текста
     const processText = () => {
         var buffValue = document.getElementById('elem1').value
         setInputText(buffValue);
-
         if (filterData.length > 0) {
             setFilterText(TextAreaFilter(buffValue, filterData))
         } else {
             setFilterText(TextAreaFilter(buffValue, result))
         }
     };
-
+    //карточки для передачи
     var propToPass = [];
-    var groupedData = [];
+
     propToPass = propToPass.concat(result);
+
 
     if (result.length > 0) {
         if ((selectedFilters.length > 0) && (inputText !== '')) {
@@ -109,16 +110,19 @@ const CollapseMenu = () => {
         }
     }
 
+    //фильтры
+    var groupedData = [];
     for (let i = 0; i < selectedFilters.length; i += 4) {
         groupedData.push(selectedFilters.slice(i, i + 4));
     }
 
-    const totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
     const [page, setPage] = React.useState(1);
 
-    const indexOfLastItem = page * ITEMS_PER_PAGE;
-    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-    const currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
+    var totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
+    var indexOfLastItem = page * ITEMS_PER_PAGE;
+    var indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+    //элементы передаваемые на текущую страницу
+    var currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
 
     const handlePageChangeBtn = (amount) => {
         if (amount > 0) {
@@ -130,6 +134,7 @@ const CollapseMenu = () => {
         }
     };
 
+    //красная обводка вокруг поля ввода
     const [style, setStyle] = useState({});
 
     const [prevValue, setPrevValue] = useState(1);
@@ -139,24 +144,16 @@ const CollapseMenu = () => {
     const handleChange = (e) => {
         clearTimeout(timeoutRef.current);
         let newValue = e.target.value;
-
         timeoutRef.current = setTimeout(() => {
-            console.log(newValue)
-            console.log(isNaN(newValue))
-            console.log(newValue < 1)
-            console.log(newValue > totalPages)
             if (isNaN(newValue) || newValue < 1 || newValue > totalPages) {
-                console.log('чета')
                 setStyle({ border: "2px solid red" });
                 setPage(prevValue);
             } else {
-                console.log('юпи')
                 setStyle({});
                 setPage(newValue);
                 setPrevValue(newValue);
             }
         }, 1000);
-
     };
 
 
@@ -249,14 +246,13 @@ const CollapseMenu = () => {
                         </Nav>
                     </Sidenav.Body>
                 </div>
-                <div className='super_main_wrapper'>
+                <div className='filter_wrapper'>
                     <Sidenav.Body>
                         <Nav id="menuItems">
                             {!collapsed && (
                                 <>
                                     {selectedFilters.length !== 0 ? (
                                         <>
-
                                             {groupedData.map((element) => {
                                                 return (
                                                     <div className="selected_filters">
@@ -286,7 +282,6 @@ const CollapseMenu = () => {
                         </Nav>
                     </Sidenav.Body>
                 </div>
-
 
                 <div className="main_cards_wrapper">
                     <Sidenav.Body>
@@ -323,15 +318,16 @@ const CollapseMenu = () => {
                                             onChange={handleChange}
                                             style={style}
                                         ></input>
+                                        <div className='bottom_line_element'><p>из {totalPages}</p></div>
                                         <button className='page_btn  bottom_line_element' onClick={() => handlePageChangeBtn(1)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m375-240-43-43 198-198-198-198 43-43 241 241-241 241Z" /></svg>
                                         </button>
                                         <button className='page_btn  bottom_line_element' onClick={() => handlePageChangeBtn(2)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m255-241-42-42 198-198-198-198 42-42 240 240-240 240Zm253 0-42-42 198-198-198-198 42-42 240 240-240 240Z" /></svg>
                                         </button>
-                                        <div className='bottom_line_element'>{page}</div>
+                                        <div className='bottom_line_element'>{ITEMS_PER_PAGE}</div>
                                         <div className='bottom_line_element'>из</div>
-                                        <div className='bottom_line_element'>{totalPages}</div>
+                                        <div className='bottom_line_element'>{propToPass.length}</div>
                                     </div> : null}
                             </>
                         )}
