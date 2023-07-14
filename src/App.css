@@ -37,9 +37,6 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   border-radius: 6px;
 }
 
-.main_pagination_wrapper {
-  flex: 1;
-}
 
 /* 
 .text_div {
@@ -138,13 +135,14 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   width: 100%;
 }
 
+
 .cards {
   width: 100%;
   overflow: auto;
 }
 
 .pagination-wrapper {
-  /* position: absolute; */
+  position: absolute;
   text-align: center;
   vertical-align: middle;
 
@@ -289,6 +287,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
 
 .main_pagination_wrapper {
   flex: 1;
+  width: 100%;
 }
 
 .Menu {
@@ -605,9 +604,6 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
       border-radius: 0.4rem;
       box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1199999973);
       box-sizing: border-box;
-
-
-
 
       .filter_svg {
         position: relative;

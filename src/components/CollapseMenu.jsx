@@ -17,6 +17,8 @@ const ITEMS_PER_PAGE = 5;
 
 const CollapseMenu = () => {
 
+    const [page, setPage] = React.useState(1);
+
     //действие при закрытии индикации выбранного фильтра
     const cancelFilter = (index) => {
         var buffFilter = [];
@@ -42,6 +44,7 @@ const CollapseMenu = () => {
     // Выбранные фильтры их потом надо будет отображать.
     const [selectedFilters, setSelectedFilters] = useState([]);
     var applyFilters = (filters) => {
+        setPage(1);
         setSelectedFilters(filters);
         setFilter(ColorTypeFilter(filters, result));
     };
@@ -63,7 +66,7 @@ const CollapseMenu = () => {
     }, []);
 
     //Срабатывание по кнопке
-    const handleButtonClick = (option) => {
+    const handleTimeButtonClick = (option) => {
         var filteredBuff = TimeFilter(option)
         setResult(filteredBuff);
         setSelectedOption(option);
@@ -81,6 +84,7 @@ const CollapseMenu = () => {
     const processText = () => {
         var buffValue = document.getElementById('elem1').value
         setInputText(buffValue);
+        setPage(1);
         if (filterData.length > 0) {
             setFilterText(TextAreaFilter(buffValue, filterData))
         } else {
@@ -116,7 +120,7 @@ const CollapseMenu = () => {
         groupedData.push(selectedFilters.slice(i, i + 4));
     }
 
-    const [page, setPage] = React.useState(1);
+
 
     var totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
     var indexOfLastItem = page * ITEMS_PER_PAGE;
@@ -178,11 +182,11 @@ const CollapseMenu = () => {
                                             <div className="big_period_group">
                                                 <div className="period_group">
                                                     <button className={selectedOption === 'withinHour' ? 'p_active' : 'period'}
-                                                        onClick={() => handleButtonClick('withinHour')}>Час</button>
+                                                        onClick={() => handleTimeButtonClick('withinHour')}>Час</button>
                                                     <button className={selectedOption === 'today' ? 'p_active' : 'period'}
-                                                        onClick={() => handleButtonClick('today')}>Сегодня</button>
+                                                        onClick={() => handleTimeButtonClick('today')}>Сегодня</button>
                                                     <button className={selectedOption === 'yesterday' ? 'p_active' : 'period'}
-                                                        onClick={() => handleButtonClick('yesterday')}>Вчера</button>
+                                                        onClick={() => handleTimeButtonClick('yesterday')}>Вчера</button>
                                                 </div>
                                             </div>
                                         </div >
@@ -327,7 +331,7 @@ const CollapseMenu = () => {
                                         </button>
                                         <div className='bottom_line_element'>{ITEMS_PER_PAGE}</div>
                                         <div className='bottom_line_element'>из</div>
-                                        <div className='bottom_line_element'>{propToPass.length}</div>
+                                        <div className='bottom_line_element'>{propToPass.length}&nbsp;</div>
                                     </div> : null}
                             </>
                         )}
