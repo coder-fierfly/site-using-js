@@ -8,15 +8,30 @@ import FilterPopup from './FilterPopup';
 import ColorTypeFilter from './ColorTypeFilter';
 import TextAreaFilter from './TextAreaFilter';
 import MatchMapping from "../MatshMapping";
-
-//сделать основное меню расширяемым
-// неделя
-// месяц год    
+import MatchPeriod from "../MatchPeriod"
 
 const ITEMS_PER_PAGE = 5;
 
 const CollapseMenu = () => {
 
+    const keys = Object.keys(MatchPeriod);
+    const periodLength = keys.length;
+
+    const [indexPeriod, setIndex] = useState(0);
+
+    const handlePrev = () => {
+        if (indexPeriod !== 0) {
+            setIndex((indexPeriod - 1 + periodLength) % periodLength);
+        }
+    };
+
+    const handleNext = () => {
+        if (indexPeriod !== 3) {
+            setIndex((indexPeriod + 1) % periodLength);
+        }
+    };
+
+    // текущая страница
     const [page, setPage] = React.useState(1);
 
     //действие при закрытии индикации выбранного фильтра
@@ -52,14 +67,13 @@ const CollapseMenu = () => {
     // Открытие и закрытие меню
     const [collapsed, setCollapsed] = useState(true);
 
-
     //Отфильтрованные данные по времени
     const [result, setResult] = useState([]);
 
     //Выбранная переменная
     const [selectedOption, setSelectedOption] = useState([]);
 
-    //по дефолту выбранный период
+    //по умолчанию выбранный период
     useEffect(() => {
         setResult(TimeFilter('withinHour'));
         setSelectedOption('withinHour');
@@ -67,6 +81,7 @@ const CollapseMenu = () => {
 
     //Срабатывание по кнопке
     const handleTimeButtonClick = (option) => {
+        console.log('htb')
         var filteredBuff = TimeFilter(option)
         setResult(filteredBuff);
         setSelectedOption(option);
@@ -180,14 +195,19 @@ const CollapseMenu = () => {
                                     <>
                                         <div className="top_menu">
                                             <div className="big_period_group">
+                                                <button className='change-period-btn' onClick={handlePrev}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#93959A"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z" /></svg>
+                                                </button>
                                                 <div className="period_group">
-                                                    <button className={selectedOption === 'withinHour' ? 'p_active' : 'period'}
-                                                        onClick={() => handleTimeButtonClick('withinHour')}>Час</button>
-                                                    <button className={selectedOption === 'today' ? 'p_active' : 'period'}
-                                                        onClick={() => handleTimeButtonClick('today')}>Сегодня</button>
-                                                    <button className={selectedOption === 'yesterday' ? 'p_active' : 'period'}
-                                                        onClick={() => handleTimeButtonClick('yesterday')}>Вчера</button>
+                                                    <button className={selectedOption === MatchPeriod[(indexPeriod)].description ? 'p_active' : 'period'}
+                                                        onClick={() => handleTimeButtonClick(MatchPeriod[(indexPeriod)].description)}>{MatchPeriod[(indexPeriod)].name}</button>
+                                                    <button className={selectedOption === MatchPeriod[(indexPeriod + 1)].description ? 'p_active' : 'period'}
+                                                        onClick={() => handleTimeButtonClick(MatchPeriod[(indexPeriod + 1)].description)}>{MatchPeriod[(indexPeriod + 1)].name}</button>
+                                                    <button className={selectedOption === MatchPeriod[(indexPeriod + 2)].description ? 'p_active' : 'period'}
+                                                        onClick={() => handleTimeButtonClick(MatchPeriod[(indexPeriod + 2)].description)}>{MatchPeriod[(indexPeriod + 2)].name}</button>
                                                 </div>
+                                                <button className='change-period-btn' onClick={handleNext}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#93959A"><path d="M530-481 332-679l43-43 241 241-241 241-43-43 198-198Z" /></svg>                                                </button>
                                             </div>
                                         </div >
                                     </>

@@ -1,5 +1,8 @@
 const MatchMapping = {
-
+    0: {
+        color: "#4285F4",
+        description: "Резерв"
+    },
     1: {
         color: "#38C25D",
         description: "Штатно"
@@ -25,10 +28,6 @@ const MatchMapping = {
         description: ""
     },
     7: {
-        color: "#4285F4",
-        description: "Резерв"
-    },
-    0: {
         color: "#4285F4",
         description: "Резерв"
     }

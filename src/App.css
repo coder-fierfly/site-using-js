@@ -7,7 +7,7 @@
 nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   display: flex;
   flex-direction: column;
-  height: 99.3vh;
+  height: 94vh;
   background-color: white;
 }
 
@@ -77,6 +77,16 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  margin-bottom: 0.8rem;
+
+}
+
+.item_1.item_bold {
+  font-weight: 600 !important;
+}
+
+.element_top {
+  margin-top: 0.3rem;
 }
 
 .chart {
@@ -87,9 +97,8 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
 .close_popup_btn,
 .collapse_popup_btn {
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 0;
-  transform: translate(-50%, 50%);
 }
 
 .padding-popup-content {
@@ -116,9 +125,17 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   border-radius: 10px;
 }
 
+svg.rs-icon {
+  height: 30px;
+  width: 30px;
+
+  /* margin-bottom: 15px; */
+
+}
+
 .checkbox_group {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   margin-left: 20px;
   /* margin-bottom: 10px; */
@@ -252,8 +269,24 @@ a.rs-nav-item {
   margin-bottom: 15px;
 }
 
+span.rs-ripple-pond {
+  width: 30px;
+  height: 30px;
+  right: 0px;
+  bottom: 0px;
+}
+
 button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {
   float: none;
+  padding: 0 0;
+  width: 30px;
+  /* height: 30px;
+  position: absolute; */
+}
+
+
+nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out {
+  background-color: white;
 }
 
 #toggleButton::after {
@@ -265,14 +298,38 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   fill: #93959A;
 }
 
+.rs-sidenav-toggle {
+  padding-left: 15px;
+}
+
+
+.rs-sidenav-toggle.rs-sidenav-toggle-collapsed {
+  padding-left: 0px;
+  padding-right: 0px;
+  position: fixed;
+  top: 0.2rem;
+}
+
 .page_placeholder {
   width: 30px;
   height: 40px;
   border: solid 0.1rem #e3e3e3;
 }
 
+.change-period-btn {
+  background-color: white;
+  height: 20px;
+  /* width: 10px; */
+}
+
+/* .toggle {
+  padding-right: 15px;
+} */
+
 .line_element {
   display: inline-block;
+  /* padding-right: 15px; */
+  background-color: white;
 }
 
 .bottom_line_element {
@@ -463,6 +520,8 @@ ul#menuItems {
 div#toggleButton {
   border-top: 0px;
   color: while;
+  /* position: absolute;
+  top: 15px; */
 }
 
 button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {
@@ -475,7 +534,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
   display: flex;
   flex: 1;
   padding-top: 1.2rem;
-  padding-left: 1.6rem;
+  /* padding-left: 1.6rem; */
   padding-right: 0;
   width: 100%;
   background-color: #FFFFFF;
@@ -536,7 +595,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
         overflow: hidden;
         position: relative;
         white-space: nowrap;
-        width: 7.5rem;
+        width: 7rem;
         border-style: none;
       }
 
@@ -551,6 +610,7 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
     flex-shrink: 0;
     height: 3.2rem;
     width: 100%;
+    padding-left: 1.6rem;
 
     .search {
       background-color: #ffffff;

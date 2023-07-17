@@ -1,30 +1,26 @@
 import json from "./jsonConsole.json";
+import moment from 'moment';
+
 var cardList = json.data.alerts;
 function TimeFilter(filterOption) {
     const sortData = [];
-    const currentTime = Date.now();
+    var now = moment();
     cardList.map((item) => {
-        const transmittedDate = item.time_value * 1000;
-        const timeDifference = currentTime - item.time_value;
-        const startOfToday = new Date().setHours(0, 0, 0, 0);
-        const endOfToday = new Date().setHours(23, 59, 59, 999);
-        const startOfYesterday = new Date();
-        startOfYesterday.setDate(startOfYesterday.getDate() - 1);
-        startOfYesterday.setHours(0, 0, 0, 0);
-        const endOfYesterday = new Date();
-        endOfYesterday.setDate(endOfYesterday.getDate() - 1);
-        endOfYesterday.setHours(23, 59, 59, 999);
-        const startOfWithinAnHour = currentTime - 3600000;
-
-        if (filterOption === 'withinHour' && transmittedDate >= startOfWithinAnHour && transmittedDate <= currentTime) {
+        var event = moment.unix(item.time_value);
+        if (filterOption === 'withinHour' && event.isAfter(now.subtract(1, 'hour'))) {
             sortData.push(item);
-        } else if (filterOption === 'today' && transmittedDate >= startOfToday && transmittedDate <= endOfToday) {
+        } else if (filterOption === 'today' && event.isSame(now, 'day')) {
             sortData.push(item);
-        } else if (filterOption === 'yesterday' && transmittedDate >= startOfYesterday && transmittedDate <= endOfYesterday) {
+        } else if (filterOption === 'yesterday' && event.isSame(now.subtract(1, 'day'), 'day')) {
+            sortData.push(item);
+        } else if (filterOption === 'week' && event.isAfter(now.subtract(1, 'week'))) {
+            sortData.push(item);
+        } else if (filterOption === 'month' && event.isAfter(now.subtract(1, 'month'))) {
+            sortData.push(item);
+        } else if (filterOption === 'year' && event.isAfter(now.subtract(1, 'year'))) {
             sortData.push(item);
         }
     });
-
     return sortData;
 }
 
