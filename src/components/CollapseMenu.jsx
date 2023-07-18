@@ -12,22 +12,27 @@ import MatchPeriod from "../MatchPeriod"
 
 const ITEMS_PER_PAGE = 5;
 
+//класс содержащий в себе все выпадающее меню с карточками
 const CollapseMenu = () => {
 
-    const keys = Object.keys(MatchPeriod);
-    const periodLength = keys.length;
+    //количество периодов
+    const period = Object.keys(MatchPeriod);
+    const periodLength = period.length;
 
-    const [indexPeriod, setIndex] = useState(0);
+    // индекс для отображения начального периода даты
+    const [indexPeriod, setIndexPeriod] = useState(0);
 
+    // нажатие на кнопку обратно при перелистывании периодов
     const handlePrev = () => {
         if (indexPeriod !== 0) {
-            setIndex((indexPeriod - 1 + periodLength) % periodLength);
+            setIndexPeriod((indexPeriod - 1 + periodLength) % periodLength);
         }
     };
 
+    // нажатие на кнопку вперед при перелистывании периодов
     const handleNext = () => {
         if (indexPeriod !== 3) {
-            setIndex((indexPeriod + 1) % periodLength);
+            setIndexPeriod((indexPeriod + 1) % periodLength);
         }
     };
 
@@ -46,6 +51,7 @@ const CollapseMenu = () => {
     //открыто или закрыто всплывающее окно
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+    // открытие и закрытие окна меню
     const openPopup = () => {
         setIsPopupOpen(true);
     };
@@ -81,7 +87,6 @@ const CollapseMenu = () => {
 
     //Срабатывание по кнопке
     const handleTimeButtonClick = (option) => {
-        console.log('htb')
         var filteredBuff = TimeFilter(option)
         setResult(filteredBuff);
         setSelectedOption(option);
@@ -111,7 +116,6 @@ const CollapseMenu = () => {
 
     propToPass = propToPass.concat(result);
 
-
     if (result.length > 0) {
         if ((selectedFilters.length > 0) && (inputText !== '')) {
             propToPass.length = 0;
@@ -135,14 +139,15 @@ const CollapseMenu = () => {
         groupedData.push(selectedFilters.slice(i, i + 4));
     }
 
-
-
+    // totalPages - полное количество страниц, indexOfFirstItem - индекс первого элемента на текущей странице
+    // indexOfLastItem - последнего
     var totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
     var indexOfLastItem = page * ITEMS_PER_PAGE;
     var indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
     //элементы передаваемые на текущую страницу
     var currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
 
+    //перелистывание страниц
     const handlePageChangeBtn = (amount) => {
         if (amount > 0) {
             const newNumber = Math.min(page + amount, totalPages);
@@ -156,6 +161,7 @@ const CollapseMenu = () => {
     //красная обводка вокруг поля ввода
     const [style, setStyle] = useState({});
 
+    //предыдущее значение, при не правильно введенной странице
     const [prevValue, setPrevValue] = useState(1);
 
     const timeoutRef = useRef(null);
@@ -175,8 +181,6 @@ const CollapseMenu = () => {
         }, 1000);
     };
 
-
-
     return (
 
         <Sidebar className="SidebarCollapse"
@@ -186,7 +190,6 @@ const CollapseMenu = () => {
             <Sidenav className="SidenavCollapse" appearance="default"
                 expanded={!collapsed}
             >
-
                 <div className="in_line">
                     <div className="line_element">
                         <Sidenav.Body>
@@ -340,8 +343,8 @@ const CollapseMenu = () => {
                                             placeholder={page}
                                             type="text"
                                             onChange={handleChange}
-                                            style={style}
-                                        ></input>
+                                            style={style}>
+                                        </input>
                                         <div className='bottom_line_element'><p>из {totalPages}</p></div>
                                         <button className='page_btn  bottom_line_element' onClick={() => handlePageChangeBtn(1)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="30"><path d="m375-240-43-43 198-198-198-198 43-43 241 241-241 241Z" /></svg>

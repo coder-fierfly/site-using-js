@@ -2,10 +2,12 @@ import json from "./jsonConsole.json";
 import moment from 'moment';
 
 var cardList = json.data.alerts;
+
+// фильтрация данных по периодам
 function TimeFilter(filterOption) {
     const sortData = [];
     var now = moment();
-    cardList.map((item) => {
+    cardList.forEach((item) => {
         var event = moment.unix(item.time_value);
         if (filterOption === 'withinHour' && event.isAfter(now.subtract(1, 'hour'))) {
             sortData.push(item);

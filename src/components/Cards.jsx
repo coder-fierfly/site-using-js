@@ -3,12 +3,15 @@ import MatchMapping from "../MatshMapping";
 
 const Cards = (props) => {
 
+    // showPopupLin - видно ли окошко с графиком
     const [showPopupLink, setShowPopup] = useState(false);
 
+    // открытие окошка график по ссылке
     const handleLinkClick = () => {
         setShowPopup(true);
     };
 
+    // закрытие окошка график по ссылке
     const handleCloseLinkClick = () => {
         setShowPopup(false);
     };
@@ -24,6 +27,7 @@ const Cards = (props) => {
         }
     };
 
+    // форматирование даты под нужный формат вывода
     function timeConverter(time, interval) {
         const convertDate = new Date(time * 1000);
         if (interval === 'withinHour') {
@@ -68,12 +72,11 @@ const Cards = (props) => {
                         <div className="card" key={item.event_id} >
                             <>
                                 <button className="close-button" onClick={() => handleClick(item.event_id)}>
-                                    {selectedIndex === null ? (<div className="collapse_popup_btn">
+                                    {selectedIndex !== item.event_id ? (<div className="collapse_popup_btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" fill="#93959A" width="26"><path d="M480-345 240-585l43-43 197 198 197-197 43 43-240 239Z" /></svg>
                                     </div>) : (<div className="collapse_popup_btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" fill="#93959A" width="26"><path d="m283-345-43-43 240-240 240 239-43 43-197-197-197 198Z" /></svg>
                                     </div>)}
-
                                 </button>
                                 <div className="board_line" style={{ background: col }}></div>
                                 <div className="signal_color"  >
@@ -99,7 +102,7 @@ const Cards = (props) => {
 
                                     {(selectedIndex === item.event_id && item.label !== '') ?
                                         (<div className="container"><p><span className="appellation_element">Класс опасности:&nbsp;</span>
-                                            <span className="item_element">{item.label}</span></p></div>) : (item.label === '' ? (null) : (<p className="item_5">Класс опасности: {item.label}</p>))}
+                                            <span className="item_element">{item.label}</span></p></div>) : (item.label === '' ? (null) : (null))}
 
                                     {(selectedIndex === item.event_id && item.time_value !== '') ?
                                         (<div className="container element_top"><p><span className="appellation_element">Время:&nbsp;</span>

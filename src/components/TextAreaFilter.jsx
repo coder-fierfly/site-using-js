@@ -8,7 +8,7 @@ function TextAreaFilter(text, array) {
 
     const searchRegex = new RegExp(text, 'i');
 
-    array.map(element => {
+    array.forEach(element => {
         if (searchRegex.test(element.target_name) || searchRegex.test(element.name) || searchRegex.test(MatchMapping[element.state].description)) {
             results.push(element);
         }

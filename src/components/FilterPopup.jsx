@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 
 const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
+  
+  // выбранные фильтры
   const [selectedFilters, setSelectedFilters] = useState([]);
 
-  const handleFilterChange = (event) => {
+  // для уставки выбранных фильтров
+  function handleFilterChange(event) {
     const { value, checked } = event.target;
     if (checked) {
       setSelectedFilters((prevFilters) => [...prevFilters, value]);
     } else {
-      setSelectedFilters((prevFilters) =>
-        prevFilters.filter((filter) => filter !== value)
+      setSelectedFilters((prevFilters) => prevFilters.filter((filter) => filter !== value)
       );
     }
-  };
+  }
 
-
-  //применяю уже выбранные фильтры
+  // применяю уже выбранные фильтры
   useEffect(() => {
     setSelectedFilters(selectedOptions);
   }, []);
 
+  // срабатывание по кнопке "применить"
   const handleApply = () => {
     onApply(selectedFilters);
     onClose();

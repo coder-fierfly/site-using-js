@@ -3,10 +3,10 @@ function ColorTypeFilter(filterOption, result) {
     //элемент из фильтра
     filterOption.forEach(element => {
         //элемент из отфильтрованных данных
-        result.map(item => {
+        result.forEach(item => {
             //по цветам
             if (element.match(/^\d+$/)) {
-                if (item.state == element) {
+                if (item.state === element) {
                     sortData.push(item)
                 }
                 //по состоянию

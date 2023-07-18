@@ -1,6 +1,6 @@
 import './App.css';
 import './sidebar-alerts.css';
-import React, { useState } from 'react';
+import React from 'react';
 
 import CollapseMenu from './components/CollapseMenu';
 
