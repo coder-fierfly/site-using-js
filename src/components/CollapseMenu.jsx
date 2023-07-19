@@ -280,9 +280,9 @@ const CollapseMenu = () => {
                                 <>
                                     {selectedFilters.length !== 0 ? (
                                         <>
-                                            {groupedData.map((element) => {
+                                            {groupedData.map((element, item) => {
                                                 return (
-                                                    <div className="selected_filters">
+                                                    <div className="selected_filters" key={item}>
                                                         {element.map((item, itemIndex) => (
                                                             <div className="box_filter" key={itemIndex}>
                                                                 {item.match(/^\d+$/) ? (<div className="signal" style={{ background: MatchMapping[item].color }}></div>) :
