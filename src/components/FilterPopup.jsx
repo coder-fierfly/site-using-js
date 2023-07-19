@@ -51,7 +51,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="padding-popup-content">
-          <div className="filters-d6F">
+          <div className="filters">
             <div className="top_popup">
               <button className="reset_button" onClick={handleResetFilters}>
                 Сбросить
@@ -329,15 +329,6 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
 
             <div className="danger_wrapper">
               <p className="danger_text">Класс опасности</p>
-
-              {/* <button className="more_filter_btn" onClick={() => handleClick(1)}>
-  {selectedIndex !== 1 ? (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path id="arrow up" d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z" fill="#0079F7"/>
-</svg>) : (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path id="arrow down" d="M7.41 8.58997L12 13.17L16.59 8.58997L18 9.99997L12 16L6 9.99997L7.41 8.58997Z" fill="#515357"/>
-</svg>)}
-
-</button> */}
               <button
                 className="more_filter_btn"
                 onClick={() => handleClick(2)}
