@@ -11,7 +11,7 @@
   box-shadow: 13px -0.8px 2rem rgba(0, 0, 0, 0.25);
 
   box-sizing: border-box;
-  height: 87vh;
+  height: 85vh;
   left: 0;
   overflow: hidden;
   padding-top: 1.2rem;
@@ -174,10 +174,51 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   z-index: 3;
 }
 
+.emulate_wrapper {
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: solid 0.1rem #e3e3e3;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  height: 4rem;
+  overflow: hidden;
+  padding-right: 2.2rem;
+  position: relative;
+  width: 100%;
+
+  .filter_line {
+    background-color: #ad2c72;
+    flex-shrink: 0;
+    height: 3.9rem;
+    margin: 0rem 2rem 0.1rem 0rem;
+    width: 0.2rem;
+  }
+  .count_cards {
+    color: #515357;
+    display: flex;
+    flex-shrink: 0;
+    font-family: Roboto, "Source Sans Pro";
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.1725;
+    white-space: nowrap;
+  }
+}
+
+.emulate_btn {
+  width: 60px;
+  height: 40px;
+  padding: 0px 0px 0px 0px !important;
+  border-bottom: solid 0.1rem #e3e3e3;
+  border: 0px 0px 1px 0px;
+  border-radius: 0px !important;
+}
+
 svg.rs-icon {
   height: 30px;
   width: 30px;
-  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .checkbox_group {
@@ -435,7 +476,7 @@ a.rs-nav-item {
   display: inline;
   position: relative;
   height: 35px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 span.rs-ripple-pond {
@@ -448,7 +489,7 @@ span.rs-ripple-pond {
 button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {
   float: none;
   padding: 0 0;
-  width: 56px;
+  width: 40px;
 }
 
 nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out {
@@ -472,7 +513,7 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out {
   padding-left: 0px;
   padding-right: 0px;
   position: fixed;
-  top: 0.2rem;
+  top: 0.8rem;
 }
 
 .page_placeholder {
@@ -667,6 +708,7 @@ ul#menuItems {
 div#toggleButton {
   border-top: 0px;
   color: while;
+  height: 40px;
 }
 
 button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {

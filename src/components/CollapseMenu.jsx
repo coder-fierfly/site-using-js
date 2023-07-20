@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, ModalWrapper } from "react";
 import TimeFilter from "./TimeFilter";
 import "rsuite/dist/rsuite.min.css";
-import { Nav, Sidenav, Sidebar } from "rsuite";
+import { Nav, Sidenav, Sidebar, Button } from "rsuite";
 
 import Cards from "./Cards";
 import FilterPopup from "./FilterPopup";
@@ -52,6 +52,7 @@ const CollapseMenu = () => {
 
   // открытие и закрытие окна меню
   const openPopup = () => {
+    console.log("open");
     setIsPopupOpen(true);
   };
 
@@ -71,6 +72,14 @@ const CollapseMenu = () => {
 
   // Открытие и закрытие меню
   const [collapsed, setCollapsed] = useState(true);
+
+  const emulateToggle = (filter) => {
+    console.log("emulateToggle");
+    console.log(filter);
+    setSelectedFilters(filter);
+    setFilter(ColorTypeFilter(filter, TimeFilter("withinHour")));
+    setCollapsed(false);
+  };
 
   //Отфильтрованные данные по времени
   const [result, setResult] = useState([]);
@@ -179,10 +188,56 @@ const CollapseMenu = () => {
     }, 1000);
   };
 
+  const popupRef = useRef();
+  // const handleOutsideClick = (event) => {
+  //   // Проверяем, является ли целевой элемент клика потомком всплывающего окна
+  //   if (popupRef.current && !popupRef.current.contains(event.target)) {
+  //     console.log("asd");
+  //     closePopup();
+  //   }
+  // };
+
+  // // закрытие окна при клике вне его
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     console.log("handleClickOutside");
+  //     if (
+  //       isPopupOpen &&
+  //       !event.target.closest(".filter-popup") &&
+  //       !event.target.closest(".open-popup-button")
+  //     ) {
+  //       console.log("close");
+  //       closePopup();
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, [isPopupOpen]);
+
+  // функция для обработки клика вне всплывающего окна
+  const handleClickOutside = (event) => {
+    console.log("jeje");
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      // applyFilters(selectedFilters);
+      // console.log("www");
+      closePopup();
+    }
+  };
+
+  // добавление и удаление слушателя события клика
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
+
   return (
     <Sidebar
       className="SidebarCollapse"
-      width={collapsed ? 57 : 300}
+      width={collapsed ? 60 : 300}
       collapsible
     >
       <Sidenav
@@ -190,7 +245,7 @@ const CollapseMenu = () => {
         appearance="default"
         expanded={!collapsed}
       >
-        <div className="in_line">
+        <div className={!collapsed ? "" : "in_line"}>
           <div className="line_element">
             <Sidenav.Body>
               <Nav id="menuItems">
@@ -294,13 +349,102 @@ const CollapseMenu = () => {
         </div>
         <Sidenav.Header>
           {collapsed && (
-            <Sidenav.Toggle
-              //   id="toggleButton"
-              expanded={collapsed}
-              onToggle={(expanded) => setCollapsed(expanded)}
-            >
-              {/* <div>he</div> */}
-            </Sidenav.Toggle>
+            <>
+              {/* {Object.keys(MatchMapping).map((index) => {
+                console.log(MatchMapping[index].color);
+                <Button className="emulate_btn" onClick={emulateToggle}>
+                  <div class="emulate_wrapper">
+                    <div
+                      class="filter_line"
+                      style={{
+                        background: MatchMapping[index].color,
+                      }}
+                    ></div>
+                    <div class="count_cards">34</div>
+                  </div>
+                </Button>
+              })} */}
+              <Button
+                className="emulate_btn"
+                onClick={() => emulateToggle(["1"])}
+              >
+                <div className="emulate_wrapper">
+                  <div
+                    className="filter_line"
+                    style={{
+                      background: MatchMapping[1].color,
+                    }}
+                  ></div>
+                  <div className="count_cards">
+                    {ColorTypeFilter(["1"], TimeFilter("withinHour")).length}
+                  </div>
+                </div>
+              </Button>
+              <Button
+                className="emulate_btn"
+                onClick={() => emulateToggle(["2"])}
+              >
+                <div className="emulate_wrapper">
+                  <div
+                    className="filter_line"
+                    style={{
+                      background: MatchMapping[2].color,
+                    }}
+                  ></div>
+                  <div className="count_cards">
+                    {ColorTypeFilter(["2"], TimeFilter("withinHour")).length}
+                  </div>
+                </div>
+              </Button>
+              <Button
+                className="emulate_btn"
+                onClick={() => emulateToggle(["3"])}
+              >
+                <div className="emulate_wrapper">
+                  <div
+                    className="filter_line"
+                    style={{
+                      background: MatchMapping[3].color,
+                    }}
+                  ></div>
+                  <div className="count_cards">
+                    {ColorTypeFilter(["3"], TimeFilter("withinHour")).length}
+                  </div>
+                </div>
+              </Button>
+              <Button
+                className="emulate_btn"
+                onClick={() => emulateToggle(["4"])}
+              >
+                <div className="emulate_wrapper">
+                  <div
+                    className="filter_line"
+                    style={{
+                      background: MatchMapping[4].color,
+                    }}
+                  ></div>
+                  <div className="count_cards">
+                    {ColorTypeFilter(["4"], TimeFilter("withinHour")).length}
+                  </div>
+                </div>
+              </Button>
+              <Button
+                className="emulate_btn"
+                onClick={() => emulateToggle(["7"])}
+              >
+                <div className="emulate_wrapper">
+                  <div
+                    className="filter_line"
+                    style={{
+                      background: MatchMapping[7].color,
+                    }}
+                  ></div>
+                  <div className="count_cards">
+                    {ColorTypeFilter(["7"], TimeFilter("withinHour")).length}
+                  </div>
+                </div>
+              </Button>
+            </>
           )}
         </Sidenav.Header>
         <div className="top_menu_wrapper">
@@ -378,11 +522,14 @@ const CollapseMenu = () => {
                       </div>
                       {isPopupOpen && (
                         // <ModalWrapper onClick={closePopup}>
+
                         <FilterPopup
                           onClose={closePopup}
                           onApply={applyFilters}
                           selectedOptions={selectedFilters}
+                          ref={popupRef}
                         />
+
                         // </ModalWrapper>
                       )}
                     </div>
