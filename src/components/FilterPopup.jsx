@@ -4,14 +4,16 @@ import MatchMapping from "../MatshMapping";
 
 const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
   // индекс для выпадающих фильтров
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState([1]);
   const handleClick = (index) => {
-    // Если элемент уже выбран, сбрасываем индекс в null
-    if (selectedIndex === index) {
-      setSelectedIndex(null);
+    // Если элемент уже выбран
+    if (selectedIndex.includes(index)) {
+      const updatedIndex = selectedIndex.filter((item) => item !== index);
+      setSelectedIndex(updatedIndex);
       // Иначе устанавливаем индекс в значение параметра
     } else {
-      setSelectedIndex(index);
+      const newIndex = [...selectedIndex, index]; // newIndexValue - новое значение, которое нужно добавить
+      setSelectedIndex(newIndex);
     }
   };
 
@@ -66,7 +68,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
                 className="more_filter_btn"
                 onClick={() => handleClick(1)}
               >
-                {selectedIndex === 1 ? (
+                {selectedIndex.includes(1) ? (
                   <svg
                     width="24"
                     height="24"
@@ -98,7 +100,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               </button>
             </div>
 
-            {selectedIndex === 1 && selectedIndex !== 2 ? (
+            {selectedIndex.includes(1) ? (
               <>
                 <div className="checkbox_line">
                   <div
@@ -260,7 +262,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
                     </label>
                   </div>
                 </div>
-                <div className="checkbox_line">
+                {/* <div className="checkbox_line">
                   <div
                     className="square"
                     style={{ background: MatchMapping[5].color }}
@@ -291,8 +293,8 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
                       </svg>
                     </label>
                   </div>
-                </div>
-                <div className="checkbox_line">
+                </div> */}
+                {/* <div className="checkbox_line">
                   <div
                     className="square"
                     style={{ background: MatchMapping[6].color }}
@@ -323,7 +325,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
                       </svg>
                     </label>
                   </div>
-                </div>
+                </div> */}
               </>
             ) : null}
 
@@ -333,7 +335,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
                 className="more_filter_btn"
                 onClick={() => handleClick(2)}
               >
-                {selectedIndex === 2 ? (
+                {selectedIndex.includes(2) ? (
                   <svg
                     width="24"
                     height="24"
@@ -365,7 +367,7 @@ const FilterPopup = ({ onClose, onApply, selectedOptions }) => {
               </button>
             </div>
             <div className="wrapper_hazard_class">
-              {selectedIndex === 2 && selectedIndex !== 1 ? (
+              {selectedIndex.includes(2) ? (
                 <>
                   <div className="wrapper_danger_checkbox">
                     <div className="item_danger_checkbox">

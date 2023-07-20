@@ -5,9 +5,13 @@
 
 .filters {
   background-color: #ffffff;
-  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 -0.8rem 2rem rgba(0, 0, 0, 0.25);
+  clip-path: inset(0 -10px 0 0); */
+
+  box-shadow: 13px -0.8px 2rem rgba(0, 0, 0, 0.25);
+
   box-sizing: border-box;
-  height: 54.6rem;
+  height: 87vh;
   left: 0;
   overflow: hidden;
   padding-top: 1.2rem;
@@ -82,7 +86,7 @@
 nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
   display: flex;
   flex-direction: column;
-  height: 94vh;
+  height: 99.8vh;
   background-color: white;
 }
 
@@ -173,6 +177,7 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
 svg.rs-icon {
   height: 30px;
   width: 30px;
+  padding-right: 10px;
 }
 
 .checkbox_group {
@@ -244,7 +249,7 @@ svg.rs-icon {
   padding: 8px 12px;
   justify-content: center;
   align-items: center;
-  gap: 18px;
+  gap: 185px;
 
   .signal_text {
     color: var(--ds-primary-black, #515357);
@@ -369,7 +374,7 @@ svg.rs-icon {
   padding: 0.8rem 1.2rem;
   justify-content: center;
   align-items: center;
-  gap: 130.5px;
+  gap: 123px;
 
   .danger_text {
     color: var(--ds-primary-black, #515357);
@@ -443,7 +448,7 @@ span.rs-ripple-pond {
 button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs-btn-default {
   float: none;
   padding: 0 0;
-  width: 30px;
+  width: 56px;
 }
 
 nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out {
@@ -459,9 +464,9 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out {
   fill: #93959a;
 }
 
-.rs-sidenav-toggle {
+/* .rs-sidenav-toggle {
   padding-left: 15px;
-}
+} */
 
 .rs-sidenav-toggle.rs-sidenav-toggle-collapsed {
   padding-left: 0px;
@@ -794,6 +799,22 @@ button.rs-sidenav-toggle-button.rs-btn-icon.rs-btn-icon-placement-left.rs-btn.rs
       padding: 14px 12px;
       border-radius: 0.4rem;
       box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1199999973);
+      box-sizing: border-box;
+
+      .filter_svg {
+        position: relative;
+        bottom: 10px;
+        right: 7.5px;
+        fill: #93959a;
+      }
+    }
+
+    .filter_btn_active {
+      background: #f0f1f2;
+      width: 32px;
+      height: 32px;
+      padding: 14px 12px;
+      border-radius: 0.4rem;
       box-sizing: border-box;
 
       .filter_svg {
