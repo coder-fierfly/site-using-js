@@ -1,6 +1,5 @@
 function ColorTypeFilter(filterOption, result) {
   const sortData = [];
-  console.log('ColorTypeFilter');
   //элемент из фильтра
   filterOption.forEach((element) => {
     //элемент из отфильтрованных данных

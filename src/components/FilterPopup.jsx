@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import MatchMapping from "../MatshMapping";
 
 const FilterPopup = React.forwardRef(
@@ -32,15 +32,11 @@ const FilterPopup = React.forwardRef(
       }
     }
 
-    useEffect(() => {
-      onApply(selectedFilters);
-    }, [selectedFilters, onApply]);
     //сброс всех фильтров
-    const handleResetFilters = () => {
+    function handleResetFilters() {
       setSelectedFilters([]);
       onApply([]);
-      onClose();
-    };
+    }
     // применяю уже выбранные фильтры
     useEffect(() => {
       setSelectedFilters(selectedOptions);
@@ -51,6 +47,39 @@ const FilterPopup = React.forwardRef(
       onApply(selectedFilters);
       onClose();
     };
+
+    // const popupRef = useRef();
+    // функция для обработки клика вне всплывающего окна
+    // const handleClickOutside = (event) => {
+    //   if (popupRef.current && !popupRef.current.contains(event.target)) {
+    //     // applyFilters(selectedFilters);
+    //     // console.log("www");
+    //     onApply(selectedFilters);
+    //     onClose();
+    //   }
+    // };
+
+    // useEffect(() => {
+    //   // Функция для обработки кликов вне окна
+    //   const handleClickOutside = (event) => {
+    //     if (ref.current && !ref.current.contains(event.target)) {
+    //       // Клик был вне окна, поэтому закрываем его
+    //       // Здесь вы можете вызвать функцию или устанавливать состояние для закрытия окна
+    //       console.log("Click outside the window. Close the window here.");
+    //       onApply(selectedFilters);
+    //       onClose();
+    //     }
+    //   };
+
+    //   // Добавляем обработчик кликов на документе
+    //   document.addEventListener("click", handleClickOutside);
+
+    //   // Очищаем обработчик при размонтировании компонента
+    //   return () => {
+    //     document.removeEventListener("click", handleClickOutside);
+    //   };
+    // }, []);
+
     // добавляем обработчик события для кликов вне всплывающего окна
     // useEffect(() => {
     //   function handleClickOutside(event) {
@@ -130,7 +159,7 @@ const FilterPopup = React.forwardRef(
                           type="checkbox"
                           value="0"
                           className="hidden-checkbox"
-                          defaultChecked={selectedOptions.includes("0")}
+                          checked={selectedFilters.includes("0")}
                           onChange={handleFilterChange}
                         />
                         <span className="checkmark"></span>
@@ -162,7 +191,7 @@ const FilterPopup = React.forwardRef(
                           type="checkbox"
                           value="1"
                           className="hidden-checkbox"
-                          defaultChecked={selectedOptions.includes("1")}
+                          checked={selectedFilters.includes("1")}
                           onChange={handleFilterChange}
                         />
                         <span className="checkmark"></span>
@@ -194,7 +223,7 @@ const FilterPopup = React.forwardRef(
                           type="checkbox"
                           value="2"
                           className="hidden-checkbox"
-                          defaultChecked={selectedOptions.includes("2")}
+                          checked={selectedFilters.includes("2")}
                           onChange={handleFilterChange}
                         />
                         <span className="checkmark"></span>
@@ -226,7 +255,7 @@ const FilterPopup = React.forwardRef(
                           type="checkbox"
                           value="3"
                           className="hidden-checkbox"
-                          defaultChecked={selectedOptions.includes("3")}
+                          checked={selectedFilters.includes("3")}
                           onChange={handleFilterChange}
                         />
                         <span className="checkmark"></span>
@@ -258,7 +287,7 @@ const FilterPopup = React.forwardRef(
                           type="checkbox"
                           value="4"
                           className="hidden-checkbox"
-                          defaultChecked={selectedOptions.includes("4")}
+                          checked={selectedFilters.includes("4")}
                           onChange={handleFilterChange}
                         />
                         <span className="checkmark"></span>
@@ -278,70 +307,6 @@ const FilterPopup = React.forwardRef(
                       </label>
                     </div>
                   </div>
-                  {/* <div className="checkbox_line">
-                  <div
-                    className="square"
-                    style={{ background: MatchMapping[5].color }}
-                  ></div>
-                  <p className="desc_text">{MatchMapping[5].description}</p>
-                  <div>
-                    <label className="custom-checkbox">
-                      <input
-                        type="checkbox"
-                        value="5"
-                        className="hidden-checkbox"
-                        defaultChecked={selectedOptions.includes("5")}
-                        onChange={handleFilterChange}
-                      />
-                      <span className="checkmark"></span>
-                      <svg
-                        className="tick-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M6.9999 14.2L2.7999 9.99998L1.3999 11.4L6.9999 17L18.9999 4.99998L17.5999 3.59998L6.9999 14.2Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </label>
-                  </div>
-                </div> */}
-                  {/* <div className="checkbox_line">
-                  <div
-                    className="square"
-                    style={{ background: MatchMapping[6].color }}
-                  ></div>
-                  <p className="desc_text">{MatchMapping[6].description}</p>
-                  <div>
-                    <label className="custom-checkbox">
-                      <input
-                        type="checkbox"
-                        value="6"
-                        className="hidden-checkbox"
-                        defaultChecked={selectedOptions.includes("6")}
-                        onChange={handleFilterChange}
-                      />
-                      <span className="checkmark"></span>
-                      <svg
-                        className="tick-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M6.9999 14.2L2.7999 9.99998L1.3999 11.4L6.9999 17L18.9999 4.99998L17.5999 3.59998L6.9999 14.2Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </label>
-                  </div>
-                </div> */}
                 </>
               ) : null}
 
@@ -393,7 +358,7 @@ const FilterPopup = React.forwardRef(
                             type="checkbox"
                             value="C1"
                             className="hidden-checkbox"
-                            defaultChecked={selectedOptions.includes("C1")}
+                            checked={selectedFilters.includes("C1")}
                             onChange={handleFilterChange}
                           />
                           <span className="checkmark"></span>
@@ -421,7 +386,7 @@ const FilterPopup = React.forwardRef(
                             type="checkbox"
                             value="C2"
                             className="hidden-checkbox"
-                            defaultChecked={selectedOptions.includes("C2")}
+                            checked={selectedFilters.includes("C2")}
                             onChange={handleFilterChange}
                           />
                           <span className="checkmark"></span>
@@ -449,7 +414,7 @@ const FilterPopup = React.forwardRef(
                             type="checkbox"
                             value="C3"
                             className="hidden-checkbox"
-                            defaultChecked={selectedOptions.includes("C3")}
+                            checked={selectedFilters.includes("C3")}
                             onChange={handleFilterChange}
                           />
                           <span className="checkmark"></span>
@@ -477,7 +442,7 @@ const FilterPopup = React.forwardRef(
                             type="checkbox"
                             value="C4"
                             className="hidden-checkbox"
-                            defaultChecked={selectedOptions.includes("C4")}
+                            checked={selectedFilters.includes("C4")}
                             onChange={handleFilterChange}
                           />
                           <span className="checkmark"></span>

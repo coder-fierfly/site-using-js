@@ -12,12 +12,9 @@ function TimeFilter(filterOption) {
     const unixTimeWithTimezone = Math.floor(currentDate.getTime() / 1000) - (timezoneOffsetInMinutes * 60);
     const sortData = [];
     var now = moment.unix(unixTimeWithTimezone);
-
     cardList.forEach((item) => {
         var event = moment.unix(item.time_value);
-        const startOfLastHour = now.clone().startOf('hour');
-        const endOfLastHour = now.clone().endOf('hour');
-        if (filterOption === 'withinHour' && event.isBetween(startOfLastHour, endOfLastHour)) {
+        if (filterOption === 'withinHour' && event.isAfter(now.subtract(60, 'minutes'))) {
             sortData.push(item);
         } else if (filterOption === 'today' && event.isSame(now, 'day')) {
             sortData.push(item);

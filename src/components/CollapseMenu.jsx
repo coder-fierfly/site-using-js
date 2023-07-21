@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, ModalWrapper } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TimeFilter from "./TimeFilter";
 import "rsuite/dist/rsuite.min.css";
 import { Nav, Sidenav, Sidebar, Button } from "rsuite";
@@ -54,6 +54,9 @@ const CollapseMenu = () => {
   const openPopup = () => {
     console.log("open");
     setIsPopupOpen(true);
+    if (isPopupOpen) {
+      setIsPopupOpen(false);
+    }
   };
 
   const closePopup = () => {
@@ -148,45 +151,45 @@ const CollapseMenu = () => {
 
   // totalPages - полное количество страниц, indexOfFirstItem - индекс первого элемента на текущей странице
   // indexOfLastItem - последнего
-  var totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
-  var indexOfLastItem = page * ITEMS_PER_PAGE;
-  var indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  // var totalPages = Math.ceil(propToPass.length / ITEMS_PER_PAGE);
+  // var indexOfLastItem = page * ITEMS_PER_PAGE;
+  // var indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   //элементы передаваемые на текущую страницу
-  var currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
+  // var currentItems = propToPass.slice(indexOfFirstItem, indexOfLastItem);
 
   //перелистывание страниц
-  const handlePageChangeBtn = (amount) => {
-    if (amount > 0) {
-      const newNumber = Math.min(page + amount, totalPages);
-      setPage(newNumber);
-    } else {
-      const newNumber = Math.max(page + amount, 1);
-      setPage(newNumber);
-    }
-  };
+  // const handlePageChangeBtn = (amount) => {
+  //   if (amount > 0) {
+  //     const newNumber = Math.min(page + amount, totalPages);
+  //     setPage(newNumber);
+  //   } else {
+  //     const newNumber = Math.max(page + amount, 1);
+  //     setPage(newNumber);
+  //   }
+  // };
 
   //красная обводка вокруг поля ввода
-  const [style, setStyle] = useState({});
+  // const [style, setStyle] = useState({});
 
   //предыдущее значение, при не правильно введенной странице
-  const [prevValue, setPrevValue] = useState(1);
+  // const [prevValue, setPrevValue] = useState(1);
 
-  const timeoutRef = useRef(null);
+  // const timeoutRef = useRef(null);
 
-  const handleChange = (e) => {
-    clearTimeout(timeoutRef.current);
-    let newValue = e.target.value;
-    timeoutRef.current = setTimeout(() => {
-      if (isNaN(newValue) || newValue < 1 || newValue > totalPages) {
-        setStyle({ border: "2px solid red" });
-        setPage(prevValue);
-      } else {
-        setStyle({});
-        setPage(newValue);
-        setPrevValue(newValue);
-      }
-    }, 1000);
-  };
+  // const handleChange = (e) => {
+  //   clearTimeout(timeoutRef.current);
+  //   let newValue = e.target.value;
+  //   timeoutRef.current = setTimeout(() => {
+  //     if (isNaN(newValue) || newValue < 1 || newValue > totalPages) {
+  //       setStyle({ border: "2px solid red" });
+  //       setPage(prevValue);
+  //     } else {
+  //       setStyle({});
+  //       setPage(newValue);
+  //       setPrevValue(newValue);
+  //     }
+  //   }, 1000);
+  // };
 
   const popupRef = useRef();
   // const handleOutsideClick = (event) => {
@@ -215,24 +218,6 @@ const CollapseMenu = () => {
   //     document.removeEventListener("click", handleClickOutside);
   //   };
   // }, [isPopupOpen]);
-
-  // функция для обработки клика вне всплывающего окна
-  const handleClickOutside = (event) => {
-    console.log("jeje");
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      // applyFilters(selectedFilters);
-      // console.log("www");
-      closePopup();
-    }
-  };
-
-  // добавление и удаление слушателя события клика
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  });
 
   return (
     <Sidebar
