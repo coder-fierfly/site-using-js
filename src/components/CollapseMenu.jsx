@@ -52,7 +52,6 @@ const CollapseMenu = () => {
 
   // открытие и закрытие окна меню
   const openPopup = () => {
-    console.log("open");
     setIsPopupOpen(true);
     if (isPopupOpen) {
       setIsPopupOpen(false);
@@ -77,8 +76,6 @@ const CollapseMenu = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   const emulateToggle = (filter) => {
-    console.log("emulateToggle");
-    console.log(filter);
     setSelectedFilters(filter);
     setFilter(ColorTypeFilter(filter, TimeFilter("withinHour")));
     setCollapsed(false);
@@ -335,20 +332,6 @@ const CollapseMenu = () => {
         <Sidenav.Header>
           {collapsed && (
             <>
-              {/* {Object.keys(MatchMapping).map((index) => {
-                console.log(MatchMapping[index].color);
-                <Button className="emulate_btn" onClick={emulateToggle}>
-                  <div class="emulate_wrapper">
-                    <div
-                      class="filter_line"
-                      style={{
-                        background: MatchMapping[index].color,
-                      }}
-                    ></div>
-                    <div class="count_cards">34</div>
-                  </div>
-                </Button>
-              })} */}
               <Button
                 className="emulate_btn"
                 onClick={() => emulateToggle(["1"])}
@@ -376,9 +359,9 @@ const CollapseMenu = () => {
                       background: MatchMapping[2].color,
                     }}
                   ></div>
-                  <div className="count_cards">
+                  <p className="count_cards">
                     {ColorTypeFilter(["2"], TimeFilter("withinHour")).length}
-                  </div>
+                  </p>
                 </div>
               </Button>
               <Button
@@ -437,7 +420,7 @@ const CollapseMenu = () => {
             <Nav>
               {!collapsed && (
                 <>
-                  <div className="top_menu">
+                  <div className="top_menu filter_top">
                     <div className="filter_group">
                       <div className="search">
                         <div className="search_group">
