@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MatchMapping from "../MatshMapping";
+import MatchMapping from "../MatchMapping";
 
 const Cards = (props) => {
   // showPopupLin - видно ли окошко с графиком
@@ -31,13 +31,7 @@ const Cards = (props) => {
     const convertDate = new Date(time * 1000);
     if (interval === "withinHour") {
       const currentTime = new Date();
-      const unixTimestamp = Math.floor(Date.now() / 1000);
-      const timezoneOffsetInMinutes = currentTime.getTimezoneOffset();
-      const unixTimeWithTimezone =
-        Math.floor(currentTime.getTime() / 1000) - timezoneOffsetInMinutes * 60;
-      var min =
-        Math.floor((currentTime - time * 1000) / 60000) +
-        (unixTimeWithTimezone - unixTimestamp) / 60;
+      var min = Math.floor((currentTime - time * 1000) / 60000);
       return min.toString() + " мин назад";
     }
     var validIntervals = ["yesterday", "year", "month", "week"];
@@ -58,7 +52,7 @@ const Cards = (props) => {
     }
     if (interval === "today") {
       const formattedTime = convertDate
-        .toLocaleString("en-US", {
+        .toLocaleString("en-GB", {
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
@@ -93,16 +87,16 @@ const Cards = (props) => {
       {props.itemValue.length === 0 ? (
         <div className="withoutColor">Нет подходящих элементов</div>
       ) : (
-        props.itemValue.map((item) => {
+        props.itemValue.map((item, id) => {
           var col = MatchMapping[item.state].color;
           return (
-            <div className="card" key={item.event_id}>
+            <div className="card" key={id}>
               <>
                 <button
                   className="close-button"
-                  onClick={() => handleClick(item.event_id)}
+                  onClick={() => handleClick(id)}
                 >
-                  {selectedIndex !== item.event_id ? (
+                  {selectedIndex !== id ? (
                     <div className="collapse_popup_btn">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +132,7 @@ const Cards = (props) => {
                 </div>
 
                 <div className="text_group">
-                  {selectedIndex === item.event_id && item.name !== "" ? (
+                  {selectedIndex === id && item.name !== "" ? (
                     <p className="item_1 item_bold">
                       {MatchMapping[item.state].description}
                     </p>
@@ -148,7 +142,7 @@ const Cards = (props) => {
                     </p>
                   )}
 
-                  {selectedIndex === item.event_id && item.name !== "" ? (
+                  {selectedIndex === id && item.name !== "" ? (
                     <div className="container element_top">
                       <p>
                         <span className="appellation_element">
@@ -161,8 +155,7 @@ const Cards = (props) => {
                     <p className="item_2">{item.name}</p>
                   )}
 
-                  {selectedIndex === item.event_id &&
-                  item.target_name !== "" ? (
+                  {selectedIndex === id && item.target_name !== "" ? (
                     <div className="container">
                       <p>
                         <span className="appellation_element">
@@ -178,8 +171,7 @@ const Cards = (props) => {
                   ) : item.target_name === "" ? null : (
                     <p className="item_3">{item.target_name}</p>
                   )}
-                  {selectedIndex === item.event_id &&
-                  item.alert_template !== "" ? (
+                  {selectedIndex === id && item.alert_template !== "" ? (
                     <div className="item_5">
                       <p>
                         <span className="appellation_element">
@@ -192,7 +184,7 @@ const Cards = (props) => {
                     </div>
                   ) : null}
 
-                  {selectedIndex === item.event_id && item.value.emp !== "" ? (
+                  {selectedIndex === id && item.value.emp !== "" ? (
                     <div className="item_5">
                       <p>
                         <span className="appellation_element">
@@ -205,7 +197,7 @@ const Cards = (props) => {
                     </div>
                   ) : null}
 
-                  {selectedIndex === item.event_id && item.label !== "" ? (
+                  {selectedIndex === id && item.label !== "" ? (
                     <div className="container">
                       <p>
                         <span className="appellation_element">
@@ -216,7 +208,7 @@ const Cards = (props) => {
                     </div>
                   ) : item.label === "" ? null : null}
 
-                  {selectedIndex === item.event_id && item.time_value !== "" ? (
+                  {selectedIndex === id && item.time_value !== "" ? (
                     <div className="container element_top">
                       <p>
                         <span className="appellation_element">

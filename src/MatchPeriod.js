@@ -18,11 +18,11 @@ const MatchPeriod = {
     4: {
         description: "month",
         name: "Месяц"
-    },
-    5: {
-        description: "year",
-        name: "Год"
     }
+    // 5: {
+    //     description: "year",
+    //     name: "Год"
+    // }
 
 };
 export default MatchPeriod;

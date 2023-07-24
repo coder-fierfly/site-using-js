@@ -7,16 +7,17 @@ import Cards from "./Cards";
 import FilterPopup from "./FilterPopup";
 import ColorTypeFilter from "./ColorTypeFilter";
 import TextAreaFilter from "./TextAreaFilter";
-import MatchMapping from "../MatshMapping";
+import MatchMapping from "../MatchMapping";
 import MatchPeriod from "../MatchPeriod";
 
-const ITEMS_PER_PAGE = 5;
+// const ITEMS_PER_PAGE = 5;
 
 //класс содержащий в себе все выпадающее меню с карточками
 const CollapseMenu = () => {
   //количество периодов
   const period = Object.keys(MatchPeriod);
   const periodLength = period.length;
+  const maxElement = periodLength - 3;
 
   // индекс для отображения начального периода даты
   const [indexPeriod, setIndexPeriod] = useState(0);
@@ -30,13 +31,13 @@ const CollapseMenu = () => {
 
   // нажатие на кнопку вперед при перелистывании периодов
   const handleNext = () => {
-    if (indexPeriod !== 3) {
+    if (indexPeriod !== maxElement) {
       setIndexPeriod((indexPeriod + 1) % periodLength);
     }
   };
 
   // текущая страница
-  const [page, setPage] = React.useState(1);
+  // const [page, setPage] = React.useState(1);
 
   //действие при закрытии индикации выбранного фильтра
   const cancelFilter = (index) => {
@@ -67,7 +68,7 @@ const CollapseMenu = () => {
   // Выбранные фильтры их потом надо будет отображать.
   const [selectedFilters, setSelectedFilters] = useState([]);
   var applyFilters = (filters) => {
-    setPage(1);
+    // setPage(1);
     setSelectedFilters(filters);
     setFilter(ColorTypeFilter(filters, result));
   };
@@ -112,7 +113,7 @@ const CollapseMenu = () => {
   const processText = () => {
     var buffValue = document.getElementById("elem1").value;
     setInputText(buffValue);
-    setPage(1);
+    // setPage(1);
     if (filterData.length > 0) {
       setFilterText(TextAreaFilter(buffValue, filterData));
     } else {
@@ -143,7 +144,14 @@ const CollapseMenu = () => {
   //фильтры
   var groupedData = [];
   for (let i = 0; i < selectedFilters.length; i += 4) {
-    groupedData.push(selectedFilters.slice(i, i + 4));
+    var buffM = [];
+    // eslint-disable-next-line no-loop-func, array-callback-return
+    selectedFilters.map((item) => {
+      if (item !== "HTP" && item !== "DW" && item !== "Reg") {
+        buffM = [...buffM, item];
+      }
+    });
+    groupedData.push(buffM.slice(i, i + 4));
   }
 
   // totalPages - полное количество страниц, indexOfFirstItem - индекс первого элемента на текущей странице
@@ -192,7 +200,6 @@ const CollapseMenu = () => {
   // const handleOutsideClick = (event) => {
   //   // Проверяем, является ли целевой элемент клика потомком всплывающего окна
   //   if (popupRef.current && !popupRef.current.contains(event.target)) {
-  //     console.log("asd");
   //     closePopup();
   //   }
   // };

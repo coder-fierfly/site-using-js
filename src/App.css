@@ -149,17 +149,26 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-in {
 
 .chart {
   position: absolute;
-  height: 100px;
-  width: 300px;
+  height: 100vh;
+  width: 1162px;
+  background-color: #d9e2ec;
+  top: 0;
+  /* width: 300px; */
   background-color: white;
   box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1199999973);
+  right: 300px;
+  /* width: 500px; */
 }
 
 .close_popup_btn,
 .collapse_popup_btn {
   position: absolute;
-  bottom: 0rem;
+  /* bottom: 0rem; */
   right: 0;
+}
+
+.collapse_popup_btn {
+  bottom: 0rem !important;
 }
 
 .padding-popup-content {
@@ -570,6 +579,8 @@ nav.SidenavCollapse.rs-sidenav.rs-sidenav-default.rs-sidenav-collapse-out {
   right: 0;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.14),
+    0px 4px 24px 0px rgba(0, 0, 0, 0.14);
 }
 
 p + p {

@@ -1,33 +1,28 @@
 import json from "./jsonConsole.json";
-import moment from 'moment';
-import jstz from "jstz";
 import 'moment-timezone';
 
 var cardList = json.data.alerts;
 
 // фильтрация данных по периодам
 function TimeFilter(filterOption) {
-    const currentDate = new Date();
-    const oneHourAgo = new Date(currentDate.getTime() - 60 * 60 * 1000);
-    const timezoneOffsetInMinutes = currentDate.getTimezoneOffset();
-    const unixTimeWithTimezone = Math.floor(currentDate.getTime() / 1000) - (timezoneOffsetInMinutes * 60);
     const sortData = [];
-    const unixTimestamp = Math.floor(Date.now() / 1000);
-    var now = moment.unix(unixTimeWithTimezone);
-    cardList.forEach((item) => {
-        var event = moment.unix(item.time_value);
+    const now = new Date().getTime()/ 1000;
+    const oneHourAgo = now - 3600;
+    const today = new Date().setHours(0, 0, 0, 0) / 1000;
+    const yesterday = today - 86400;
+    const oneWeekAgo = today - 604800;
+    const oneMonthAgo = today - 2592000;
 
-        if (filterOption === 'withinHour' && moment.unix(unixTimeWithTimezone).diff(event, 'minutes') <= 60 ) {
+    cardList.forEach((item) => {
+        if (filterOption === 'withinHour' && item.time_value > oneHourAgo) {
             sortData.push(item);
-        } else if (filterOption === 'today' && event.isSame(now, 'day')) {
+        } else if (filterOption === 'today' && item.time_value > today) {
             sortData.push(item);
-        } else if (filterOption === 'yesterday' && event.isSame(now.subtract(1, 'day'), 'day')) {
+        } else if (filterOption === 'yesterday' && item.time_value > yesterday && item.time_value < today) {
             sortData.push(item);
-        } else if (filterOption === 'week' && event.isAfter(now.subtract(1, 'week'))) {
+        } else if (filterOption === 'week' && item.time_value > oneWeekAgo) {
             sortData.push(item);
-        } else if (filterOption === 'month' && event.isAfter(now.subtract(1, 'month'))) {
-            sortData.push(item);
-        } else if (filterOption === 'year' && event.isAfter(now.subtract(1, 'year'))) {
+        } else if (filterOption === 'month' && item.time_value > oneMonthAgo) {
             sortData.push(item);
         }
     });

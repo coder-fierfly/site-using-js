@@ -4,9 +4,7 @@ import React from 'react';
 
 import CollapseMenu from './components/CollapseMenu';
 
-
 function App() {
-
   return (
     <div className="App">
       <div className="Menu">
